@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Convert — Les Minitels</title>
+  <meta name="description" content="Convert — all-in-one offline converter for currencies, units, metals and crypto." />
+  <link rel="icon" href="/assets/img/logo.svg" type="image/svg+xml" />
+
+  <link rel="stylesheet" href="/assets/css/fonts.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
+</head>
+<body>
+  <div class="page">
+    <div class="page-container">
+      <nav class="navbar" aria-label="Primary">
+        <a href="/" class="logo-link" aria-label="Retour à l'accueil">
+          <img src="/assets/img/logo.svg" alt="Logo Les Minitels" />
+        </a>
+      </nav>
+
+      <div class="divider-line" aria-hidden="true"></div>
+
+      <main class="project-main">
+        <div class="project-content">
+          <div class="app-icon reveal">
+            <img id="p-icon" src="" alt="App icon" />
+          </div>
+
+          <h1 class="app-title reveal" id="p-title">Convert</h1>
+
+          <div class="app-description reveal" id="p-description"></div>
+
+          <div class="store-badges reveal">
+            <a class="appstore" id="p-appstore" href="#" aria-label="Download on the App Store">
+              <img src="/assets/img/appstore.svg" alt="Download on the App Store" />
+            </a>
+            <a class="googleplay" id="p-googleplay" href="#" aria-label="Get it on Google Play">
+              <img src="/assets/img/googleplay.svg" alt="Get it on Google Play" />
+            </a>
+          </div>
+
+          <section class="gallery reveal" aria-label="Screenshots">
+            <div class="gallery-scroller" id="gallery-scroller"></div>
+          </section>
+        </div>
+
+        <aside class="phone-mockup reveal" aria-hidden="true">
+          <img class="mockup-img" id="p-mockup" src="" alt="" />
+          <div class="mockup-border"></div>
+        </aside>
+      </main>
+
+      <footer class="project-footer">
+        <a href="privacy.html">Privacy Policy</a>
+      </footer>
+    </div>
+  </div>
+
+  <script type="module">
+    import { PROJECTS } from "/assets/js/projects.js";
+    import { initLightbox } from "/assets/js/lightbox.js";
+    import { initGallery } from "/assets/js/gallery.js";
+    import { initReveal } from "/assets/js/utils.js";
+
+    const proj = PROJECTS.convert;
+
+    document.title = `${proj.name} — Les Minitels`;
+
+    document.getElementById("p-icon").src = proj.icon;
+    document.getElementById("p-icon").alt = `${proj.name} App Icon`;
+    document.getElementById("p-title").textContent = proj.name;
+
+    const descEl = document.getElementById("p-description");
+    proj.description.forEach((line) => {
+      const p = document.createElement("p");
+      p.textContent = line === "" ? "\u00A0" : line;
+      descEl.appendChild(p);
+    });
+
+    document.getElementById("p-appstore").href = proj.appStore || "#";
+    document.getElementById("p-googleplay").href = proj.googlePlay || "#";
+
+    document.getElementById("p-mockup").src = proj.mockup;
+    document.getElementById("p-mockup").alt = `${proj.name} mockup screen`;
+
+    const galleryScroller = document.getElementById("gallery-scroller");
+    proj.showreel.forEach((src, idx) => {
+      const item = document.createElement("div");
+      item.className = "gallery-item";
+      item.dataset.full = src;
+      item.setAttribute("aria-label", `Open screenshot ${idx + 1}`);
+
+      const img = document.createElement("img");
+      img.src = src;
+      img.alt = `Screenshot ${idx + 1}`;
+      img.loading = "lazy";
+
+      const border = document.createElement("div");
+      border.className = "gallery-border";
+      border.setAttribute("aria-hidden", "true");
+
+      item.appendChild(img);
+      item.appendChild(border);
+      galleryScroller.appendChild(item);
+    });
+
+    initGallery(document.querySelector(".gallery"));
+    initLightbox(document.querySelector(".gallery"));
+    initReveal();
+  </script>
+</body>
+</html>

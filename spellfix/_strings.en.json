@@ -1,0 +1,156 @@
+{
+  "lang": "en",
+  "paths": {
+    "assets": "../assets",
+    "home": "./",
+    "fr_home": "../",
+    "en_home": "./"
+  },
+  "nav": {
+    "lang_label": "Language",
+    "fr_active": "",
+    "en_active": "active",
+    "download": "Download"
+  },
+  "head": {
+    "title": "SpellFix — On-device correction and translation for your Mac",
+    "description": "Double-tap the Option key. Your text is corrected on-device — no data ever leaves your computer. Correction, reshaping and translation for macOS."
+  },
+  "hero": {
+    "title": "Fix any <em>text</em>,<br>anywhere on your <span class=\"marker\">Mac.</span>",
+    "sub": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer.",
+    "badge_aria": "Download on the Mac App Store",
+    "badge_alt": "Download on the Mac App Store",
+    "meta_platform": "For Apple Silicon Macs",
+    "meta_os": "macOS 26 or later",
+    "double_tap": "Double-tap",
+    "demo_bad": "I would like to confirmed my presence",
+    "copied_auto": "Copied automatically",
+    "painting": "Claude Monet, <i>The Poplars at Giverny</i>, 1887"
+  },
+  "how": {
+    "eyebrow": "How it works",
+    "title": "Three steps, <span class=\"marker\">one gesture.</span>",
+    "step1_title": "Select the text.",
+    "step1_body": "In an email, a document, a note — any app.",
+    "step2_title": "Double-tap ⌥.",
+    "step2_body": "A universal shortcut, active everywhere in macOS.",
+    "step3_title": "Your text is corrected.",
+    "step3_body": "The correction replaces the original and is already on your clipboard."
+  },
+  "features": {
+    "correction": {
+      "eyebrow": "Correction",
+      "title": "Clean corrections, in a single <span class=\"marker\">gesture.</span>",
+      "body": "Grammar, spelling, conjugation. SpellFix fixes your text and auto-copies it to the clipboard. Nothing is ever sent to the internet.",
+      "pill1": "Grammar",
+      "pill2": "Spelling",
+      "pill3": "Conjugation",
+      "pill4": "Punctuation",
+      "tab_fix": "Fix grammar",
+      "tab_translate": "Translate",
+      "mockup_bad": "I would like to <u style=\"text-decoration-color:#D6B06B\">confirmed</u> my presence at tomorrow's meeting",
+      "mockup_fixed": "I would like to confirm my presence at tomorrow's meeting.",
+      "mockup_copied": "Copied",
+      "painting": "Claude Monet, <i>The Poplars</i>, 1875"
+    },
+    "tones": {
+      "eyebrow": "Tones",
+      "title": "Reshape your <span class=\"marker\">tone.</span>",
+      "body": "Professional, concise, friendly, or create a custom button like \"Molière\", just for fun. Tones are fully customizable: add your own, remove the ones you don't use.",
+      "tone_original": "Original",
+      "tone_professional": "Professional",
+      "tone_concise": "Concise",
+      "tone_friendly": "Friendly",
+      "tone_moliere": "Molière",
+      "sample_original": "I'm reaching out because I'd really like to know if you had the time to take a look at the proposal I sent last week.",
+      "mockup_intro": "Your text, reshaped to match the tone you pick.",
+      "mockup_professional": "Professional",
+      "mockup_concise": "Concise",
+      "mockup_friendly": "Friendly",
+      "mockup_moliere": "Molière",
+      "painting": "Claude Monet, <i>Poppies</i>, 1873"
+    },
+    "translation": {
+      "eyebrow": "Translation",
+      "title": "Translate without opening a <span class=\"marker blue\">tab.</span>",
+      "body": "Automatic source-language detection, translation to any target you pick. All local, all within your clipboard flow.",
+      "pill1": "EN → FR",
+      "pill2": "FR → EN",
+      "pill3": "ES, DE, IT, PT…",
+      "tab_fix": "Fix grammar",
+      "tab_translate": "Translate",
+      "mockup_src_tag": "EN",
+      "mockup_src": "I'll be out of office all next week.",
+      "mockup_dst_tag": "FR",
+      "mockup_dst": "Je serai absent du bureau toute la semaine prochaine.",
+      "painting": "Claude Monet, <i>Pourville, Low Tide</i>, 1882"
+    },
+    "local_ai": {
+      "eyebrow": "Local AI",
+      "title": "AI that lives on your <span class=\"marker warm\">Mac.</span>",
+      "body": "SpellFix uses Apple Foundation Model by default, native to your computer. You can download extra models (Qwen, Gemma, SmolLM, etc) as needed. No model requires an internet connection, once installed.",
+      "mockup_title": "AI Models",
+      "active": "Active",
+      "painting": "Claude Monet, <i>Spring at Giverny</i>, 1890"
+    }
+  },
+  "privacy": {
+    "title": "No data ever leaves your <span class=\"marker\">Mac.</span>",
+    "bullet1": "Zero network calls for correction or translation.",
+    "bullet2": "No logs, no trackers, no analytics on your text.",
+    "bullet3": "Verifiable with any firewall tool (Little Snitch, LuLu): zero outbound traffic during use."
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "One purchase. Forever. <br><em style=\"font-style:italic\">No subscription.</em>",
+    "free_name": "Free",
+    "free_price": "$0",
+    "free_sub": "Forever · Includes 7-day Pro trial",
+    "feat_correction": "Unlimited correction",
+    "feat_reformulation": "Reformulation",
+    "feat_translation": "Translation",
+    "feat_models": "Local AI models",
+    "free_watermark": "Watermark on output : \"— Corrected by SpellFix\"",
+    "cta_download": "Download",
+    "pro_ribbon": "Lifetime",
+    "pro_name": "SpellFix Pro",
+    "pro_price": "$24",
+    "pro_sub": "One-time · Yours forever",
+    "pro_no_watermark": "No watermark",
+    "footnote": "The Pro trial starts automatically at install. For 7 days, SpellFix produces output without a watermark. After that, the app remains free, the watermark appears unless you own the Pro version."
+  },
+  "faq": {
+    "eyebrow": "Frequently asked",
+    "title": "Straight answers, <span class=\"marker\">no watermark.</span>",
+    "q1": "Does SpellFix work offline?",
+    "a1": "Yes. Correction and translation run locally on your Mac. No data is sent over the internet.",
+    "q2": "Which AI models are used?",
+    "a2": "By default, Apple Foundation Model, preinstalled on Apple Silicon Macs running macOS 26 and later. You can add other local models (Qwen 3.5, Gemma 4, SmolLM3) from the settings.",
+    "q3": "Is my text sent anywhere?",
+    "a3": "No. No network request is made during correction or translation. You can verify this with Little Snitch or any equivalent tool.",
+    "q4": "Does SpellFix work in every app?",
+    "a4": "Yes. The ⌥⌥ shortcut (customizable) is global: Mail, Notes, Safari, Word, Slack, Figma, everywhere.",
+    "q5": "Can I customize the tone buttons?",
+    "a5": "Yes. In the settings, you can add, remove, or edit tones. Your layout is yours.",
+    "q6": "What's the difference between Free and Pro?",
+    "a6": "All features are identical.<br>The only difference: the free version appends a small \"— Corrected by SpellFix\" watermark to generated text. The first 7 days are on Pro, watermark-free.",
+    "q7": "Is it really a one-time purchase?",
+    "a7": "Yes. $24 once and it's yours forever. No subscription, no resale, no renewal.",
+    "q8": "What is the refund policy?",
+    "a8": "Apple's App Store rules apply. You can request a refund from Apple directly within 14 days."
+  },
+  "closing": {
+    "title": "Write better. <em style=\"font-style:italic\">Quietly.</em>"
+  },
+  "footer": {
+    "tagline": "Local correction and translation, on your Mac.",
+    "col_product": "Product",
+    "link_download": "Download",
+    "link_support": "Support",
+    "link_privacy": "Privacy",
+    "link_terms": "Terms",
+    "col_studio": "Studio",
+    "copyright": "© 2026 Les Minitels · All rights reserved"
+  }
+}

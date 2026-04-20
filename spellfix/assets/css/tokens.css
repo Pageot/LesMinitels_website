@@ -1,0 +1,60 @@
+/* Design tokens — SpellFix */
+:root {
+  /* Palette */
+  --paper: #F7F3EC;
+  --paper-tint: #EFE8DB;
+  --paper-warm: #F2EADC;
+  --ink: #1A1A1A;
+  --ink-soft: #4A4A4A;
+  --ink-mute: #7A7468;
+  --accent-green: #7BC49C;
+  --accent-green-deep: #5FA882;
+  --accent-blue: #7CA9D5;
+  --accent-blue-deep: #5D8BBB;
+  --accent-warm: #D6B06B;
+  --accent-warm-deep: #B88E4A;
+  --border: #E3DCCC;
+  --border-soft: #EAE3D3;
+
+  /* Type */
+  --font-display: "Averia Serif Libre", "EB Garamond", Georgia, serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* Scale */
+  --fs-h1: clamp(52px, 7vw, 88px);
+  --fs-h2: clamp(38px, 4.6vw, 60px);
+  --fs-h3: clamp(26px, 2.4vw, 32px);
+  --fs-body: 18px;
+  --fs-small: 14px;
+  --fs-tiny: 12px;
+
+  /* Spacing */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  --sp-9: 96px;
+  --sp-10: 128px;
+
+  /* Radii + shadow */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
+  --shadow-card: 0 1px 2px rgba(26,26,26,0.04), 0 12px 40px -16px rgba(26,26,26,0.15);
+  --shadow-float: 0 2px 4px rgba(26,26,26,0.06), 0 24px 60px -20px rgba(26,26,26,0.22);
+
+  --container: 1200px;
+}
+
+[data-paper="white"] {
+  --paper: #FDFCF9;
+  --paper-tint: #F5F1E8;
+  --paper-warm: #F9F5EC;
+  --border: #ECE6D7;
+}

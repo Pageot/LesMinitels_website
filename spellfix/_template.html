@@ -1,0 +1,423 @@
+<!doctype html>
+<html lang="{{ lang }}" data-paper="white">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ head.title }}</title>
+<meta name="description" content="{{ head.description }}">
+<link rel="alternate" hreflang="fr" href="{{ paths.fr_home }}">
+<link rel="alternate" hreflang="en" href="{{ paths.en_home }}">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:wght@400;450;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{{ paths.assets }}/css/tokens.css">
+<link rel="stylesheet" href="{{ paths.assets }}/css/styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="container nav">
+    <a href="{{ paths.home }}" class="brand" aria-label="SpellFix">
+      <img src="{{ paths.assets }}/images/spellfix-logo.svg" alt="SpellFix" height="22">
+    </a>
+    <div class="nav-right">
+      <div class="lang-switch" role="group" aria-label="{{ nav.lang_label }}">
+        <button class="{{ nav.fr_active }}" data-lang-switch="fr" data-href="{{ paths.fr_home }}">FR</button>
+        <button class="{{ nav.en_active }}" data-lang-switch="en" data-href="{{ paths.en_home }}">EN</button>
+      </div>
+      <a class="btn btn-primary" href="#app-store"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18">{{ nav.download }}</a>
+    </div>
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero" style="padding: 140px 0px 0px">
+  <div class="container hero-grid">
+    <div class="hero-text reveal in">
+      <h1 class="display h1" style="font-size: 68px; line-height: 1; letter-spacing: -1px;">
+        {{ hero.title }}
+      </h1>
+      <p class="hero-sub">
+        {{ hero.sub }}
+      </p>
+      <div class="hero-cta">
+        <a href="#app-store" class="appstore-badge" aria-label="{{ hero.badge_aria }}">
+          <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="48">
+        </a>
+      </div>
+      <div class="hero-meta">
+        <span>{{ hero.meta_platform }}</span>
+        <span class="sep">·</span>
+        <span>{{ hero.meta_os }}</span>
+      </div>
+    </div>
+
+    <!-- Visual: painting + demo card -->
+    <div class="hero-visual reveal">
+      <div class="paint-bg"></div>
+      <div class="demo-card" data-demo>
+        <div class="tag">
+          <span class="pulse"></span>
+          {{ hero.double_tap }}
+          <span class="keycap-row">
+            <span class="keycap" data-key="opt1">⌥</span>
+            <span class="keycap" data-key="opt2">⌥</span>
+          </span>
+        </div>
+        <div class="demo-text">
+          <span class="bad">{{ hero.demo_bad }}</span>
+        </div>
+        <div class="demo-foot">
+          <span class="cp">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+            {{ hero.copied_auto }}
+          </span>
+          <span class="mono">3:42 pm</span>
+        </div>
+      </div>
+      <div class="painting-caption">{{ hero.painting }}</div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="section-pad" id="how">
+  <div class="container">
+    <div class="section-head reveal">
+      <span class="eyebrow">{{ how.eyebrow }}</span>
+      <h2 class="display h2">{{ how.title }}</h2>
+    </div>
+    <div class="how-grid">
+      <article class="how-card reveal">
+        <span class="how-num">i.</span>
+        <div class="illus">
+          <svg width="100" height="56" viewBox="0 0 160 90" fill="none">
+            <rect x="10" y="14" width="140" height="62" rx="6" fill="rgba(255,255,255,0.6)" stroke="#E3DCCC"/>
+            <rect x="22" y="28" width="110" height="6" rx="2" fill="#E3DCCC"/>
+            <rect x="22" y="42" width="86" height="6" rx="2" fill="#D6B06B" opacity="0.7"/>
+            <rect x="22" y="56" width="54" height="6" rx="2" fill="#E3DCCC"/>
+          </svg>
+        </div>
+        <h3 style="margin: 0 0 4px;">{{ how.step1_title }}</h3>
+        <p>{{ how.step1_body }}</p>
+      </article>
+      <article class="how-card reveal">
+        <span class="how-num">ii.</span>
+        <div class="illus">
+          <div style="display:inline-flex; align-items:center; gap:10px">
+            <span class="keycap" style="width:44px; height:40px; font-size:18px">⌥</span>
+            <span class="keycap" style="width:44px; height:40px; font-size:18px">⌥</span>
+          </div>
+        </div>
+        <h3 style="margin: 0 0 4px;">{{ how.step2_title }}</h3>
+        <p>{{ how.step2_body }}</p>
+      </article>
+      <article class="how-card reveal">
+        <span class="how-num">iii.</span>
+        <div class="illus">
+          <svg width="110" height="56" viewBox="0 0 160 90" fill="none">
+            <rect x="10" y="14" width="140" height="62" rx="6" fill="rgba(255,255,255,0.6)" stroke="#E3DCCC"/>
+            <rect x="22" y="28" width="110" height="6" rx="2" fill="#7BC49C" opacity="0.8"/>
+            <rect x="22" y="42" width="90" height="6" rx="2" fill="#7BC49C" opacity="0.6"/>
+            <rect x="22" y="56" width="64" height="6" rx="2" fill="#7BC49C" opacity="0.4"/>
+          </svg>
+        </div>
+        <h3 style="margin: 0 0 4px;">{{ how.step3_title }}</h3>
+        <p>{{ how.step3_body }}</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section class="section-pad" id="features" style="padding-top:0">
+  <div class="container">
+
+    <!-- 1. Correction -->
+    <div class="feature reveal">
+      <div class="feature-text">
+        <span class="eyebrow" style="color: var(--accent-green-deep)">{{ features.correction.eyebrow }}</span>
+        <h3>{{ features.correction.title }}</h3>
+        <p>{{ features.correction.body }}</p>
+        <div class="feature-pills">
+          <span class="pill active"><span style="color:var(--accent-green-deep)">✓</span> {{ features.correction.pill1 }}</span>
+          <span class="pill">{{ features.correction.pill2 }}</span>
+          <span class="pill">{{ features.correction.pill3 }}</span>
+          <span class="pill">{{ features.correction.pill4 }}</span>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="paint field"></div>
+        <div class="mockup">
+          <div class="mockup-head">
+            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
+            <span class="cog">⚙</span>
+          </div>
+          <div class="mockup-tabs">
+            <button class="active"><span class="tick">✓</span> {{ features.correction.tab_fix }}</button>
+            <button>{{ features.correction.tab_translate }}</button>
+          </div>
+          <div class="mockup-box">{{ features.correction.mockup_bad }}</div>
+          <div class="mockup-box out" style="color: var(--accent-green-deep)">{{ features.correction.mockup_fixed }}</div>
+          <div class="mockup-foot"><span class="copy">⧉ {{ features.correction.mockup_copied }}</span></div>
+        </div>
+        <div class="painting-caption">{{ features.correction.painting }}</div>
+      </div>
+    </div>
+
+    <!-- 2. Reformulation -->
+    <div class="feature reverse reveal">
+      <div class="feature-text">
+        <span class="eyebrow" style="color: var(--accent-green-deep)">{{ features.tones.eyebrow }}</span>
+        <h3>{{ features.tones.title }}</h3>
+        <p>{{ features.tones.body }}</p>
+        <div class="feature-pills" data-tones>
+          <button class="pill active" data-tone="original">{{ features.tones.tone_original }}</button>
+          <button class="pill" data-tone="professional">{{ features.tones.tone_professional }}</button>
+          <button class="pill" data-tone="concise">{{ features.tones.tone_concise }}</button>
+          <button class="pill" data-tone="friendly">{{ features.tones.tone_friendly }}</button>
+          <button class="pill moliere" data-tone="moliere">{{ features.tones.tone_moliere }}</button>
+        </div>
+        <p style="margin-top:22px; font-family:var(--font-display); font-style:italic; font-size:20px; color:var(--ink); line-height:1.45; transition: opacity 0.25s;" data-tone-output>
+          {{ features.tones.sample_original }}
+        </p>
+      </div>
+      <div class="feature-visual">
+        <div class="paint poppies"></div>
+        <div class="mockup">
+          <div class="mockup-head">
+            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
+            <span class="cog">⚙</span>
+          </div>
+          <div class="mockup-box">{{ features.tones.mockup_intro }}</div>
+          <div class="mockup-tones">
+            <span class="tone">🧳 {{ features.tones.mockup_professional }}</span>
+            <span class="tone">⏱ {{ features.tones.mockup_concise }}</span>
+            <span class="tone full">👤 {{ features.tones.mockup_friendly }}</span>
+            <span class="tone full" style="font-family:var(--font-display); font-style:italic; font-size:13.5px">{{ features.tones.mockup_moliere }}</span>
+          </div>
+        </div>
+        <div class="painting-caption">{{ features.tones.painting }}</div>
+      </div>
+    </div>
+
+    <!-- 3. Translation -->
+    <div class="feature reveal">
+      <div class="feature-text">
+        <span class="eyebrow" style="color: var(--accent-blue-deep)">{{ features.translation.eyebrow }}</span>
+        <h3>{{ features.translation.title }}</h3>
+        <p>{{ features.translation.body }}</p>
+        <div class="feature-pills">
+          <span class="pill">{{ features.translation.pill1 }}</span>
+          <span class="pill">{{ features.translation.pill2 }}</span>
+          <span class="pill">{{ features.translation.pill3 }}</span>
+        </div>
+      </div>
+      <div class="feature-visual">
+        <div class="paint cliffs"></div>
+        <div class="mockup">
+          <div class="mockup-head">
+            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
+            <span class="cog">⚙</span>
+          </div>
+          <div class="mockup-tabs">
+            <button>{{ features.translation.tab_fix }}</button>
+            <button class="active" style="color:var(--accent-blue-deep)">⟲ {{ features.translation.tab_translate }}</button>
+          </div>
+          <div class="mockup-box"><span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-mute)">{{ features.translation.mockup_src_tag }}</span> · {{ features.translation.mockup_src }}</div>
+          <div class="mockup-box out" style="color: var(--accent-blue-deep)"><span style="font-family:var(--font-mono); font-size:11px; color:var(--ink-mute); font-weight:400">{{ features.translation.mockup_dst_tag }}</span> · {{ features.translation.mockup_dst }}</div>
+        </div>
+        <div class="painting-caption">{{ features.translation.painting }}</div>
+      </div>
+    </div>
+
+    <!-- 4. Local AI -->
+    <div class="feature reverse reveal">
+      <div class="feature-text">
+        <span class="eyebrow" style="color: var(--accent-warm-deep)">{{ features.local_ai.eyebrow }}</span>
+        <h3>{{ features.local_ai.title }}</h3>
+        <p>{{ features.local_ai.body }}</p>
+      </div>
+      <div class="feature-visual">
+        <div class="paint field"></div>
+        <div class="mockup" style="width:min(82%, 380px)">
+          <div class="mockup-head">
+            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> {{ features.local_ai.mockup_title }}</span>
+            <span class="cog">⚙</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px">
+            <div class="mockup-box" style="display:flex; justify-content:space-between; align-items:center; min-height:auto; padding:10px 12px">
+              <span><span style="color:var(--accent-green-deep)">●</span> Apple Foundation</span>
+              <span class="mono" style="font-size:10.5px; color:var(--ink-mute)">{{ features.local_ai.active }} · 2.1 GB</span>
+            </div>
+            <div class="mockup-box" style="display:flex; justify-content:space-between; align-items:center; min-height:auto; padding:10px 12px">
+              <span>Qwen 3.5</span>
+              <span class="mono" style="font-size:10.5px; color:var(--ink-mute)">4.8 GB · ↓</span>
+            </div>
+            <div class="mockup-box" style="display:flex; justify-content:space-between; align-items:center; min-height:auto; padding:10px 12px">
+              <span>Gemma 4</span>
+              <span class="mono" style="font-size:10.5px; color:var(--ink-mute)">3.2 GB · ↓</span>
+            </div>
+          </div>
+        </div>
+        <div class="painting-caption">{{ features.local_ai.painting }}</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Privacy -->
+<section class="privacy reveal">
+  <div class="container">
+    <h2 class="display h2">{{ privacy.title }}</h2>
+    <div class="privacy-bullets">
+      <div class="privacy-bullet">
+        <div class="num">i.</div>
+        <p>{{ privacy.bullet1 }}</p>
+      </div>
+      <div class="privacy-bullet">
+        <div class="num">ii.</div>
+        <p>{{ privacy.bullet2 }}</p>
+      </div>
+      <div class="privacy-bullet">
+        <div class="num">iii.</div>
+        <p>{{ privacy.bullet3 }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section class="section-pad" id="pricing">
+  <div class="container">
+    <div class="pricing-head reveal">
+      <span class="eyebrow">{{ pricing.eyebrow }}</span>
+      <h2 class="display h2" style="margin-top:14px">{{ pricing.title }}</h2>
+    </div>
+    <div class="pricing-cards reveal">
+      <div class="card">
+        <h3>{{ pricing.free_name }}</h3>
+        <div class="price">{{ pricing.free_price }}</div>
+        <div class="price-sub">{{ pricing.free_sub }}</div>
+        <ul class="features-list">
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_correction }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_reformulation }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_translation }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_models }}</li>
+          <li class="muted"><img src="{{ paths.assets }}/images/minus-badge.svg" alt="" class="dash" width="20" height="20"> {{ pricing.free_watermark }}</li>
+        </ul>
+        <a href="#app-store" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
+      </div>
+      <div class="card pro">
+        <span class="ribbon"><img src="{{ paths.assets }}/images/badge-star.svg" alt="" width="15" height="15">{{ pricing.pro_ribbon }}</span>
+        <h3>{{ pricing.pro_name }} <img src="{{ paths.assets }}/images/premium-badge.svg" alt="" class="pro-icon" width="22" height="22"></h3>
+        <div class="price">{{ pricing.pro_price }}</div>
+        <div class="price-sub">{{ pricing.pro_sub }}</div>
+        <ul class="features-list">
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_correction }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_reformulation }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_translation }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_models }}</li>
+          <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.pro_no_watermark }}</li>
+        </ul>
+        <a href="#app-store" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
+      </div>
+    </div>
+    <p class="pricing-sub">
+      {{ pricing.footnote }}
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-pad" id="faq" style="padding-top:0">
+  <div class="container">
+    <div class="section-head reveal" style="text-align:center">
+      <span class="eyebrow">{{ faq.eyebrow }}</span>
+      <h2 class="display h2" style="margin:14px auto 0">{{ faq.title }}</h2>
+    </div>
+    <div class="faq reveal">
+      <details open>
+        <summary>{{ faq.q1 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a1 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q2 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a2 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q3 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a3 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q4 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a4 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q5 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a5 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q6 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a6 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q7 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a7 }}</p>
+      </details>
+      <details>
+        <summary>{{ faq.q8 }}<span class="chev" aria-hidden="true"></span></summary>
+        <p>{{ faq.a8 }}</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- Closing wordmark -->
+<section class="closing reveal">
+  <div class="container">
+    <h2 class="display h2">{{ closing.title }}</h2>
+    <a href="#app-store" class="appstore-badge" style="margin-top:10px; display:inline-block" aria-label="{{ hero.badge_aria }}">
+      <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="52">
+    </a>
+  </div>
+  <div class="bigmark" aria-hidden="true" style="letter-spacing: -12px; background-position: right center;">SpellFix</div>
+</section>
+
+<!-- Footer -->
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-col footer-about">
+      <a href="{{ paths.home }}" class="brand">
+        <img src="{{ paths.assets }}/images/spellfix-logo.svg" alt="SpellFix" height="20">
+      </a>
+      <p>{{ footer.tagline }}</p>
+    </div>
+    <div class="footer-col">
+      <h4>{{ footer.col_product }}</h4>
+      <ul>
+        <li><a href="#app-store">{{ footer.link_download }}</a></li>
+        <li><a href="./support.html">{{ footer.link_support }}</a></li>
+        <li><a href="./privacy.html">{{ footer.link_privacy }}</a></li>
+        <li><a href="./terms.html">{{ footer.link_terms }}</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>{{ footer.col_studio }}</h4>
+      <ul>
+        <li><a href="/">Les Minitels</a></li>
+        <li><a href="mailto:lesminitels@protonmail.com">lesminitels@protonmail.com</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span>{{ footer.copyright }}</span>
+    <span class="mono">v1.0 · Paris</span>
+  </div>
+</footer>
+
+<script src="{{ paths.assets }}/js/ui.js"></script>
+</body>
+</html>

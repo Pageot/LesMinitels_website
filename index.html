@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Les Minitels — Facilitateur de vie</title>
+  <meta name="description" content="Les Minitels — créateur d'apps depuis 2026. Des apps pensées pour faciliter le quotidien." />
+  <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="assets/css/fonts.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+</head>
+<body>
+  <div class="home">
+    <div class="bg-shader" id="bg-shader"></div>
+
+    <header class="hero">
+      <div class="hero-row">
+        <div class="hero-left">
+          <a href="index.html" class="logo-link" aria-label="Retour à l'accueil">
+            <img src="assets/img/logo.svg" alt="Logo Les Minitels" />
+          </a>
+          <div class="hero-texts">
+            <h1 class="hero-title">Les Minitels</h1>
+            <p class="hero-subtitle">Facilitateur de vie</p>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <p class="hero-subtitle">Créateur</p>
+          <p class="hero-title">D’apps</p>
+          <p class="hero-subtitle">Depuis 2026</p>
+        </div>
+      </div>
+    </header>
+
+    <section class="carousel-root" aria-label="Projets">
+      <div class="carousel-spacer" aria-hidden="true"></div>
+      <div class="carousel-bg">
+        <div class="carousel-scroller-wrap">
+          <div class="carousel-scroller" id="carousel-scroller" role="list"></div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script type="module">
+    import React from "https://esm.sh/react@18.3.1";
+    import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
+    import { GrainGradient } from "https://esm.sh/@paper-design/shaders-react@0.0.76?deps=react@18.3.1,react-dom@18.3.1";
+    import { initCarousel } from "./assets/js/carousel.js";
+    import { CAROUSEL_ITEMS, PROJECTS } from "./assets/js/projects.js";
+
+    const bg = document.getElementById("bg-shader");
+    const root = createRoot(bg);
+    // Swallow the benign "image must be fully loaded" race — the shader
+    // recovers on the next frame once the noise texture has loaded.
+    window.addEventListener("unhandledrejection", (e) => {
+      if (String(e.reason && e.reason.message || "").includes("u_noiseTexture")) {
+        e.preventDefault();
+      }
+    });
+
+    const render = () => {
+      root.render(
+        React.createElement(GrainGradient, {
+          width: window.innerWidth,
+          height: window.innerHeight,
+          style: { display: "block", width: "100vw", height: "100vh", position: "fixed", inset: 0, zIndex: -20 },
+          colors: ["#fff0fc75", "#ffd6b34f"],
+          colorBack: "#ffffff",
+          softness: 0,
+          intensity: 0.58,
+          noise: 0.51,
+          shape: "corners",
+          speed: 0.46,
+          scale: 1.04,
+          rotation: 176,
+          offsetX: 0.1,
+          offsetY: -0.3,
+        })
+      );
+    };
+    render();
+    let resizeRaf;
+    window.addEventListener("resize", () => {
+      if (resizeRaf) cancelAnimationFrame(resizeRaf);
+      resizeRaf = requestAnimationFrame(render);
+    });
+
+    const scroller = document.getElementById("carousel-scroller");
+    CAROUSEL_ITEMS.forEach((item) => {
+      const proj = PROJECTS[item.project];
+      const linked = proj && proj.ready && !item.placeholder;
+      const hasImage = linked && proj.showreel && proj.showreel.length > 0;
+
+      const a = document.createElement("a");
+      a.className = "carousel-card" + (hasImage ? "" : " is-placeholder");
+      a.setAttribute("role", "listitem");
+      a.setAttribute("draggable", "false");
+      if (proj) a.dataset.project = proj.id;
+      if (linked) {
+        a.href = `/${proj.id}/`;
+        a.setAttribute("aria-label", `Voir le projet ${proj.name}`);
+      } else {
+        a.href = "#";
+        a.setAttribute("aria-label", "Projet à venir");
+        a.addEventListener("click", (e) => e.preventDefault());
+      }
+
+      const inner = document.createElement("div");
+      inner.className = "carousel-card-inner";
+
+      if (hasImage) {
+        const img = document.createElement("img");
+        img.src = proj.showreel[0];
+        img.alt = proj.name;
+        img.setAttribute("draggable", "false");
+        inner.appendChild(img);
+      } else {
+        const label = document.createElement("div");
+        label.className = "placeholder-label";
+        const strong = document.createElement("strong");
+        strong.textContent = item.label;
+        const span = document.createElement("span");
+        span.textContent = linked ? "Découvrir" : "Nouvelle app";
+        label.appendChild(strong);
+        label.appendChild(span);
+        inner.appendChild(label);
+      }
+
+      const border = document.createElement("div");
+      border.className = "carousel-card-border";
+      border.setAttribute("aria-hidden", "true");
+      inner.appendChild(border);
+
+      a.appendChild(inner);
+      scroller.appendChild(a);
+    });
+
+    initCarousel(document.querySelector(".carousel-root"));
+  </script>
+</body>
+</html>
