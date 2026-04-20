@@ -1,0 +1,156 @@
+{
+  "lang": "fr",
+  "paths": {
+    "assets": "assets",
+    "home": "./",
+    "fr_home": "./",
+    "en_home": "./en/"
+  },
+  "nav": {
+    "lang_label": "Langue",
+    "fr_active": "active",
+    "en_active": "",
+    "download": "Télécharger"
+  },
+  "head": {
+    "title": "SpellFix — Correction et traduction, en local sur votre Mac",
+    "description": "Double-tap sur la touche Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre Mac. Correction, reformulation et traduction pour macOS."
+  },
+  "hero": {
+    "title": "Corrigez n'importe quel <em>texte</em>, partout sur votre <span class=\"marker\">Mac.</span>",
+    "sub": "Double-tap sur la touche Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur.",
+    "badge_aria": "Télécharger sur le Mac App Store",
+    "badge_alt": "Download on the Mac App Store",
+    "meta_platform": "Pour Mac Apple Silicon",
+    "meta_os": "macOS 26 ou ultérieur",
+    "double_tap": "Double-tap",
+    "demo_bad": "Je voudrais vous confirmez ma présence",
+    "copied_auto": "Copié automatiquement",
+    "painting": "Claude Monet, <i>Les Peupliers à Giverny</i>, 1887"
+  },
+  "how": {
+    "eyebrow": "Comment ça marche",
+    "title": "Trois étapes, <span class=\"marker\">un geste.</span>",
+    "step1_title": "Sélectionnez le texte.",
+    "step1_body": "Dans un mail, un document, une note — n'importe quelle app.",
+    "step2_title": "Double-tap sur ⌥.",
+    "step2_body": "Un raccourci universel, actif partout dans macOS.",
+    "step3_title": "Votre texte est corrigé.",
+    "step3_body": "La correction remplace l'original, et se trouve déjà dans votre presse-papier."
+  },
+  "features": {
+    "correction": {
+      "eyebrow": "Correction",
+      "title": "Une correction nette, en un <span class=\"marker\">geste.</span>",
+      "body": "Grammaire, orthographe, conjugaison. SpellFix corrige votre texte et le copie automatiquement dans le presse-papier. Rien n'est envoyé sur internet.",
+      "pill1": "Grammaire",
+      "pill2": "Orthographe",
+      "pill3": "Conjugaison",
+      "pill4": "Ponctuation",
+      "tab_fix": "Corriger",
+      "tab_translate": "Traduire",
+      "mockup_bad": "Je voudrais vous <u style=\"text-decoration-color:#D6B06B\">confirmez</u> ma présence à la réunion de demain",
+      "mockup_fixed": "Je voudrais vous confirmer ma présence à la réunion de demain.",
+      "mockup_copied": "Copié",
+      "painting": "Claude Monet, <i>Les Peupliers</i>, 1875"
+    },
+    "tones": {
+      "eyebrow": "Tons",
+      "title": "Reformulez votre <span class=\"marker\">texte.</span>",
+      "body": "Professionnel, concis, amical, ou créer un bouton custom comme « Molière », pour le fun. Les tons sont personnalisables : ajoutez les vôtres, enlevez ceux que vous n'utilisez pas.",
+      "tone_original": "Original",
+      "tone_professional": "Professionnel",
+      "tone_concise": "Concis",
+      "tone_friendly": "Amical",
+      "tone_moliere": "Molière",
+      "sample_original": "Je vous contacte car j'aimerais bien savoir si vous avez eu le temps de regarder ma proposition envoyée la semaine dernière.",
+      "mockup_intro": "Votre texte, reformulé selon le ton choisi.",
+      "mockup_professional": "Professionnel",
+      "mockup_concise": "Concis",
+      "mockup_friendly": "Amical",
+      "mockup_moliere": "Molière",
+      "painting": "Claude Monet, <i>Coquelicots</i>, 1873"
+    },
+    "translation": {
+      "eyebrow": "Traduction",
+      "title": "Traduisez, sans ouvrir un <span class=\"marker blue\">onglet.</span>",
+      "body": "Détection automatique de la langue source, traduction vers la langue de votre choix. Le tout en local, sans quitter votre presse-papier.",
+      "pill1": "FR → EN",
+      "pill2": "EN → FR",
+      "pill3": "ES, DE, IT, PT…",
+      "tab_fix": "Corriger",
+      "tab_translate": "Traduire",
+      "mockup_src_tag": "FR",
+      "mockup_src": "Je serai absent de bureau toute la semaine prochaine.",
+      "mockup_dst_tag": "EN",
+      "mockup_dst": "I'll be out of office all next week.",
+      "painting": "Claude Monet, <i>Pourville, marée basse</i>, 1882"
+    },
+    "local_ai": {
+      "eyebrow": "IA locale",
+      "title": "L'IA qui vit sur votre <span class=\"marker warm\">Mac.</span>",
+      "body": "Par défaut, SpellFix utilise Apple Foundation Model, installé nativement sur votre ordinateur. Vous pouvez télécharger d'autres modèles (Qwen, Gemma, SmolLM, etc) selon vos besoins. Aucun modèle ne demande de connexion internet, une fois installé.",
+      "mockup_title": "Modèles IA",
+      "active": "Actif",
+      "painting": "Claude Monet, <i>Printemps à Giverny</i>, 1890"
+    }
+  },
+  "privacy": {
+    "title": "Aucune donnée ne quitte votre <span class=\"marker\">Mac.</span>",
+    "bullet1": "Aucune requête réseau pour la correction ou la traduction.",
+    "bullet2": "Aucun log, aucun tracker, aucune analytique sur votre texte.",
+    "bullet3": "Vérifiable avec n'importe quel pare-feu (Little Snitch, LuLu) : zéro requête sortante pendant l'usage."
+  },
+  "pricing": {
+    "eyebrow": "Tarifs",
+    "title": "Un seul achat. Pour toujours. <br><em style=\"font-style:italic\">Pas d'abonnement.</em>",
+    "free_name": "Gratuit",
+    "free_price": "0<small>€</small>",
+    "free_sub": "Pour toujours · Essai Pro de 7 jours inclus",
+    "feat_correction": "Correction illimitée",
+    "feat_reformulation": "Reformulation",
+    "feat_translation": "Traduction",
+    "feat_models": "Modèles IA en local",
+    "free_watermark": "Filigrane dans les sorties : « — Corrected by SpellFix »",
+    "cta_download": "Télécharger",
+    "pro_ribbon": "À vie",
+    "pro_name": "SpellFix Pro",
+    "pro_price": "21<small>€</small>",
+    "pro_sub": "Achat unique · Pour toujours",
+    "pro_no_watermark": "Aucun filigrane",
+    "footnote": "L'essai Pro commence automatiquement à l'installation. Pendant 7 jours, SpellFix est sans filigrane. Ensuite, il reste gratuit, le filigrane apparaît tant que vous n'avez pas acheté la version Pro."
+  },
+  "faq": {
+    "eyebrow": "Questions fréquentes",
+    "title": "On vous répond <span class=\"marker\">sans filigrane.</span>",
+    "q1": "SpellFix fonctionne-t-il sans connexion internet ?",
+    "a1": "Oui. Toute la correction et la traduction se font en local, sur votre Mac. Aucune donnée n'est envoyée sur internet.",
+    "q2": "Quels modèles d'IA sont utilisés ?",
+    "a2": "Par défaut, Apple Foundation Model, préinstallé sur les Mac Apple Silicon sous macOS 26 et ultérieur. Vous pouvez ajouter d'autres modèles locaux (Qwen 3.5, Gemma 4, SmolLM3) depuis les réglages.",
+    "q3": "Mon texte est-il envoyé quelque part ?",
+    "a3": "Non. Aucune requête réseau n'est émise pendant la correction ou la traduction. Vous pouvez le vérifier avec Little Snitch ou n'importe quel outil équivalent.",
+    "q4": "SpellFix marche dans toutes les applications ?",
+    "a4": "Oui. Le raccourci ⌥⌥ (personnalisable) est global : Mail, Notes, Safari, Word, Slack, Figma, n'importe où.",
+    "q5": "Puis-je personnaliser les tons de reformulation ?",
+    "a5": "Oui. Dans les réglages, vous pouvez ajouter, retirer ou modifier les tons. Les raccourcis correspondants restent fidèles à votre choix.",
+    "q6": "Quelle est la différence entre la version gratuite et Pro ?",
+    "a6": "Toutes les fonctionnalités sont identiques.<br>La seule différence : la version gratuite ajoute un petit filigrane « — Corrected by SpellFix » à la fin des textes générés. Les 7 premiers jours sont offerts en version Pro, sans filigrane.",
+    "q7": "Est-ce vraiment un achat unique ?",
+    "a7": "Oui. 21 € une fois, et c'est à vous pour toujours. Aucun abonnement, aucune revente, aucun renouvellement.",
+    "q8": "Quelle est la politique de remboursement ?",
+    "a8": "Elle suit les règles de l'App Store d'Apple. Vous pouvez demander un remboursement directement auprès d'Apple dans les 14 jours."
+  },
+  "closing": {
+    "title": "Écrivez mieux. <em style=\"font-style:italic\">En silence.</em>"
+  },
+  "footer": {
+    "tagline": "Correction et traduction en local, sur votre Mac.",
+    "col_product": "Produit",
+    "link_download": "Télécharger",
+    "link_support": "Support",
+    "link_privacy": "Confidentialité",
+    "link_terms": "Conditions",
+    "col_studio": "Studio",
+    "copyright": "© 2026 Les Minitels · Tous droits réservés"
+  }
+}

@@ -1,0 +1,17 @@
+/* Nova Klasse — local font */
+@font-face {
+  font-family: "Nova Klasse";
+  src: url("../fonts/novaklasse-semibold.woff") format("woff"),
+       url("../fonts/novaklasse-semibold.otf") format("opentype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Nova Klasse";
+  src: url("../fonts/novaklasse-semibold-oblique.otf") format("opentype");
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
