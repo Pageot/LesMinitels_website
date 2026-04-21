@@ -8,40 +8,44 @@ export function initCarousel(root) {
   const bg = root.querySelector(".carousel-bg");
   if (!scroller || !cards.length) return;
 
-  // Vertical scroll → glassmorphism background opacity
   let lastOpacity = -1;
+  let startScroll = 0;
+  let endScroll = 0;
   const handleScroll = () => {
-    const startScroll = window.innerHeight * 0.1;
-    const endScroll = window.innerHeight * 0.45;
     const current = window.scrollY;
     let opacity = 0;
     if (current > startScroll) {
       opacity = Math.min(1, (current - startScroll) / (endScroll - startScroll));
     }
     opacity = Math.round(opacity * 100) / 100;
-    if (opacity === lastOpacity || !bg) return;
+    if (opacity === lastOpacity) return;
     lastOpacity = opacity;
     bg.style.backgroundColor = `rgba(255, 255, 255, ${opacity * 0.6})`;
     bg.style.backdropFilter = `blur(${opacity * 5.5}px)`;
     bg.style.webkitBackdropFilter = `blur(${opacity * 5.5}px)`;
   };
-  window.addEventListener("scroll", handleScroll, { passive: true });
-  handleScroll();
+  if (bg) {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
 
-  // Horizontal scroll → 3D coverflow. Card layout (offsetLeft/offsetWidth) only
-  // changes on resize, so we cache it to avoid forcing a layout every frame.
+  // offsetLeft/offsetWidth only change on resize, so cache them to avoid
+  // forcing layout every frame during horizontal scroll.
   let cardLayout = [];
+  let tuning = { angleRotation: 10, scaleFalloff: 0.05, translateXFactor: 10, gap: 16 };
   const measure = () => {
     cardLayout = cards.map((c) => ({ center: c.offsetLeft + c.offsetWidth / 2, w: c.offsetWidth }));
+    const isMobile = window.innerWidth < 768;
+    tuning = isMobile
+      ? { angleRotation: 8, scaleFalloff: 0.08, translateXFactor: -8, gap: 8 }
+      : { angleRotation: 10, scaleFalloff: 0.05, translateXFactor: 10, gap: 16 };
+    const viewportH = window.innerHeight;
+    startScroll = viewportH * 0.1;
+    endScroll = viewportH * 0.45;
   };
 
   const update3DEffect = () => {
     const containerCenter = scroller.scrollLeft + scroller.clientWidth / 2;
-    const isMobile = window.innerWidth < 768;
-    const angleRotation = isMobile ? 8 : 10;
-    const scaleFalloff = isMobile ? 0.08 : 0.05;
-    const translateXFactor = isMobile ? -8 : 10;
-    const gap = isMobile ? 8 : 16;
+    const { angleRotation, scaleFalloff, translateXFactor, gap } = tuning;
 
     cards.forEach((card, i) => {
       const layout = cardLayout[i];
@@ -77,6 +81,7 @@ export function initCarousel(root) {
   });
 
   measure();
+  if (bg) handleScroll();
   const third = cards[2];
   if (third) {
     const target = third.offsetLeft - scroller.clientWidth / 2 + third.offsetWidth / 2;

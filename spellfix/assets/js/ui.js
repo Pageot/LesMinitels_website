@@ -59,69 +59,168 @@
     });
   });
 
-  const demo = document.querySelector('[data-demo]');
-  if (demo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const textEl = demo.querySelector('.demo-text');
-    const opt1 = demo.querySelector('[data-key="opt1"]');
-    const opt2 = demo.querySelector('[data-key="opt2"]');
-
-    const sequences = {
-      fr: [
-        { bad: "Je voudrais vous confirmez ma présence", fix: "Je voudrais vous confirmer ma présence" },
-        { bad: "Nous somme disponible demain", fix: "Nous sommes disponibles demain" },
-        { bad: "Il faut que je vous envois le fichier", fix: "Il faut que je vous envoie le fichier" },
-      ],
-      en: [
-        { bad: "I would like to confirmed my presence", fix: "I would like to confirm my presence" },
-        { bad: "We are availible tomorow", fix: "We are available tomorrow" },
-        { bad: "Could you sent me the file please", fix: "Could you send me the file please" },
-      ]
-    };
-    const seqs = sequences[currentLang];
-    let idx = 0;
-
+  const mail = document.querySelector('[data-mail]');
+  if (mail && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const keycap = document.querySelector('.dt-keycap');
     const wait = (ms) => new Promise(r => setTimeout(r, ms));
-    const renderLine = (cls, text) => {
-      const span = document.createElement('span');
-      span.className = cls;
-      span.textContent = text;
-      textEl.replaceChildren(span);
-    };
     const press = (el) => {
       if (!el) return;
       el.classList.add('pressed');
       setTimeout(() => el.classList.remove('pressed'), 140);
     };
 
-    // Pause when tab hidden or demo off-screen to avoid burning CPU in the background
-    let visible = true;
+    // Pause when tab hidden or element off-screen
+    let onScreen = true;
+    let pendingWake = null;
+    const isAwake = () => document.visibilityState === 'visible' && onScreen;
+    const maybeWake = () => {
+      if (pendingWake && isAwake()) {
+        const r = pendingWake;
+        pendingWake = null;
+        r();
+      }
+    };
     const io = new IntersectionObserver(
-      ([entry]) => { visible = entry.isIntersecting; },
+      ([entry]) => { onScreen = entry.isIntersecting; maybeWake(); },
       { threshold: 0.1 }
     );
-    io.observe(demo);
+    io.observe(mail);
+    document.addEventListener('visibilitychange', maybeWake);
     const awake = () =>
-      document.visibilityState === 'visible' && visible
-        ? Promise.resolve()
-        : new Promise(r => {
-            const check = () => {
-              if (document.visibilityState === 'visible' && visible) r();
-              else setTimeout(check, 400);
-            };
-            check();
-          });
+      isAwake() ? Promise.resolve() : new Promise(r => { pendingWake = r; });
+
+    const cursor = mail.querySelector('[data-mail-cursor]');
+    const textBox = mail.querySelector('[data-mail-text]');
+    const selBox = mail.querySelector('[data-mail-selection]');
+    const selStart = mail.querySelector('[data-sel-start]');
+    const selEnd = mail.querySelector('[data-sel-end]');
+
+    // Measure per-line rects of the selection between greeting and signature,
+    // and the cursor start/end positions (all relative to .mail-mock).
+    // Runs at the start of each selecting phase so it stays correct on resize.
+    function measureSelection() {
+      if (!textBox || !selBox || !selStart || !selEnd) return null;
+      const mailRect = mail.getBoundingClientRect();
+      const textRect = textBox.getBoundingClientRect();
+
+      // Iterate each <p> between start and end and collect per-line text rects.
+      // Using selectNodeContents on each paragraph gives tight rects around the
+      // actual glyphs — not the block's full content-box width.
+      const allPs = Array.from(textBox.querySelectorAll('p'));
+      const startIdx = allPs.indexOf(selStart);
+      const endIdx = allPs.indexOf(selEnd);
+      if (startIdx < 0 || endIdx < 0) return null;
+      const selectedPs = allPs
+        .slice(startIdx, endIdx + 1)
+        .filter(p => !p.classList.contains('mail-blank'));
+
+      const rawRects = [];
+      for (const p of selectedPs) {
+        const r = document.createRange();
+        r.selectNodeContents(p);
+        for (const rect of r.getClientRects()) {
+          if (rect.width > 1 && rect.height > 1) rawRects.push(rect);
+        }
+        r.detach?.();
+      }
+
+      // Merge fragments that sit on the same visual line (y within 3px).
+      // Nested spans split a line into multiple rects — join them end-to-end.
+      const lines = [];
+      for (const r of rawRects) {
+        const top = r.top - textRect.top;
+        const left = r.left - textRect.left;
+        const right = left + r.width;
+        const existing = lines.find(l => Math.abs(l.top - top) < 3);
+        if (existing) {
+          existing.left = Math.min(existing.left, left);
+          existing.right = Math.max(existing.right, right);
+          existing.height = Math.max(existing.height, r.height);
+        } else {
+          lines.push({ top, left, right, height: r.height });
+        }
+      }
+      lines.sort((a, b) => a.top - b.top);
+      lines.forEach(l => { l.width = l.right - l.left; });
+
+      // Rebuild selection line divs
+      selBox.replaceChildren();
+      const totalDrag = 1200;
+      const step = lines.length > 1 ? totalDrag / lines.length : 0;
+      lines.forEach((l, i) => {
+        const div = document.createElement('div');
+        div.className = 'mail-selection__line';
+        div.style.left = (l.left - 1) + 'px';
+        div.style.top = (l.top - 1) + 'px';
+        div.style.width = (l.width + 2) + 'px';
+        div.style.height = (l.height + 2) + 'px';
+        div.style.setProperty('--sel-delay', Math.round(i * step) + 'ms');
+        selBox.appendChild(div);
+      });
+
+      // Cursor coords expressed relative to .mail-mock. For the end position,
+      // measure the last text rect of selEnd so the cursor lands at the end of
+      // the actual word, not at the paragraph's content-box right edge.
+      const startRect = selStart.getBoundingClientRect();
+      const endContentsRange = document.createRange();
+      endContentsRange.selectNodeContents(selEnd);
+      const endTextRects = endContentsRange.getClientRects();
+      const lastTextRect = endTextRects[endTextRects.length - 1] || selEnd.getBoundingClientRect();
+      endContentsRange.detach?.();
+      return {
+        lines,
+        start: {
+          x: startRect.left - mailRect.left - 2,
+          y: startRect.top - mailRect.top + startRect.height * 0.35,
+        },
+        end: {
+          x: lastTextRect.right - mailRect.left + 4,
+          y: lastTextRect.top - mailRect.top + lastTextRect.height * 0.65,
+        },
+      };
+    }
 
     (async function loop() {
       while (true) {
         await awake();
-        const seq = seqs[idx % seqs.length];
-        renderLine('bad', seq.bad);
+        // idle: typos visible with red wavy, pill at rest
         await wait(2000);
-        press(opt1); await wait(150);
-        press(opt2); await wait(350);
-        renderLine('fix', seq.fix);
-        await wait(3200);
-        idx++;
+
+        // selecting: cursor fades in at text start, drags to end while the
+        // blue selection fills line by line behind it
+        const path = measureSelection();
+        if (path && cursor) {
+          cursor.style.transition = 'none';
+          cursor.style.setProperty('--cx', path.start.x + 'px');
+          cursor.style.setProperty('--cy', path.start.y + 'px');
+          void cursor.offsetHeight;
+          cursor.style.transition = '';
+          mail.classList.add('has-cursor');
+          await wait(200); // cursor fade-in
+          mail.classList.add('is-selecting');
+          cursor.style.setProperty('--cx', path.end.x + 'px');
+          cursor.style.setProperty('--cy', path.end.y + 'px');
+          await wait(1200); // drag + selection fill
+          mail.classList.add('has-selection');
+        }
+
+        // pressing: double-tap on ⌥ (cursor + selection stay visible)
+        press(keycap); await wait(340);
+        press(keycap); await wait(460);
+
+        // fixed: swap bad → fix, fade selection out
+        mail.classList.add('is-fading-selection');
+        mail.classList.remove('is-selecting');
+        mail.classList.add('is-fixed');
+        await wait(3000);
+
+        // reset: cursor fades out, then revert to typo state
+        mail.classList.remove('has-cursor');
+        await wait(200);
+        mail.classList.remove('is-fixed');
+        mail.classList.remove('has-selection');
+        mail.classList.remove('is-fading-selection');
+        await wait(400);
       }
     })();
   }

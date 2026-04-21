@@ -712,6 +712,11 @@ button {
   cursor: pointer;
   border-radius: 16.445px;
   transition: opacity 0.2s;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  color: inherit;
 }
 
 @media (min-width: 640px) {

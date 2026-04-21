@@ -49,47 +49,47 @@
   </div>
 
   <script type="module">
-    import React from "https://esm.sh/react@18.3.1";
-    import { createRoot } from "https://esm.sh/react-dom@18.3.1/client";
-    import { GrainGradient } from "https://esm.sh/@paper-design/shaders-react@0.0.76?deps=react@18.3.1,react-dom@18.3.1";
+    import {
+      ShaderMount,
+      grainGradientFragmentShader,
+      GrainGradientShapes,
+      ShaderFitOptions,
+      getShaderColorFromString,
+      getShaderNoiseTexture,
+    } from "https://esm.sh/@paper-design/shaders@0.0.76";
     import { initCarousel } from "./assets/js/carousel.js";
     import { CAROUSEL_ITEMS, PROJECTS } from "./assets/js/projects.js";
 
     const bg = document.getElementById("bg-shader");
-    const root = createRoot(bg);
-    // Swallow the benign "image must be fully loaded" race — the shader
-    // recovers on the next frame once the noise texture has loaded.
-    window.addEventListener("unhandledrejection", (e) => {
-      if (String(e.reason && e.reason.message || "").includes("u_noiseTexture")) {
-        e.preventDefault();
-      }
-    });
-
-    const render = () => {
-      root.render(
-        React.createElement(GrainGradient, {
-          width: window.innerWidth,
-          height: window.innerHeight,
-          style: { display: "block", width: "100vw", height: "100vh", position: "fixed", inset: 0, zIndex: -20 },
-          colors: ["#fff0fc75", "#ffd6b34f"],
-          colorBack: "#ffffff",
-          softness: 0,
-          intensity: 0.58,
-          noise: 0.51,
-          shape: "corners",
-          speed: 0.46,
-          scale: 1.04,
-          rotation: 176,
-          offsetX: 0.1,
-          offsetY: -0.3,
-        })
+    const colors = ["#fff0fc75", "#ffd6b34f"];
+    const noiseTexture = getShaderNoiseTexture();
+    // WebGL texImage2D throws if the noise image isn't decoded yet.
+    noiseTexture.decode().then(() => {
+      new ShaderMount(
+        bg,
+        grainGradientFragmentShader,
+        {
+          u_colorBack: getShaderColorFromString("#ffffff"),
+          u_colors: colors.map(getShaderColorFromString),
+          u_colorsCount: colors.length,
+          u_softness: 0,
+          u_intensity: 0.58,
+          u_noise: 0.51,
+          u_shape: GrainGradientShapes.corners,
+          u_noiseTexture: noiseTexture,
+          u_fit: ShaderFitOptions.contain,
+          u_scale: 1.04,
+          u_rotation: 176,
+          u_offsetX: 0.1,
+          u_offsetY: -0.3,
+          u_originX: 0.5,
+          u_originY: 0.5,
+          u_worldWidth: 0,
+          u_worldHeight: 0,
+        },
+        undefined,
+        0.46,
       );
-    };
-    render();
-    let resizeRaf;
-    window.addEventListener("resize", () => {
-      if (resizeRaf) cancelAnimationFrame(resizeRaf);
-      resizeRaf = requestAnimationFrame(render);
     });
 
     const scroller = document.getElementById("carousel-scroller");

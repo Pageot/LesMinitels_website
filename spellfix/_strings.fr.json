@@ -24,9 +24,22 @@
     "meta_platform": "Pour Mac Apple Silicon",
     "meta_os": "macOS 26 ou ultérieur",
     "double_tap": "Double-tap",
-    "demo_bad": "Je voudrais vous confirmez ma présence",
-    "copied_auto": "Copié automatiquement",
-    "painting": "Claude Monet, <i>Les Peupliers à Giverny</i>, 1887"
+    "painting": "Claude Monet, <i>Les Peupliers à Giverny</i>, 1887",
+    "mail": {
+      "new_message": "Nouveau message",
+      "to_label": "À",
+      "cc_label": "Cc",
+      "to_chip": "@louis",
+      "cc_chip": "@marie.madeleine",
+      "subject": "Suivi sur la mise à jour du budget",
+      "greeting": "Bonjour l'équipe,",
+      "closing": "Bien cordialement,",
+      "signature": "Molière",
+      "attach": "Joindre un fichier",
+      "attachment": "tartuffe.epub",
+      "send": "Envoyer",
+      "body_html": "Je voudrais <span class=\"tw\"><span class=\"bad\">recommender</span><span class=\"fix\">recommander</span></span> qu'on <span class=\"tw\"><span class=\"bad\">planifit</span><span class=\"fix\">planifie</span></span> la réunion la semaine <span class=\"tw\"><span class=\"bad\">prochainne</span><span class=\"fix\">prochaine</span></span> pour <span class=\"tw\"><span class=\"bad\">discuté</span><span class=\"fix\">discuter</span></span> du <span class=\"tw\"><span class=\"bad\">budjet</span><span class=\"fix\">budget</span></span>."
+    }
   },
   "how": {
     "eyebrow": "Comment ça marche",

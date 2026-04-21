@@ -1,3 +1,39 @@
+import { makeChevron } from "./gallery.js";
+
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+function makeCloseIcon(size = 28) {
+  const svg = document.createElementNS(SVG_NS, "svg");
+  const s = String(size);
+  svg.setAttribute("width", s);
+  svg.setAttribute("height", s);
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "2");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+  svg.setAttribute("aria-hidden", "true");
+  for (const [x1, y1, x2, y2] of [[18, 6, 6, 18], [6, 6, 18, 18]]) {
+    const line = document.createElementNS(SVG_NS, "line");
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+    svg.appendChild(line);
+  }
+  return svg;
+}
+
+function makeNavButton(cls, label, svg) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = cls;
+  btn.setAttribute("aria-label", label);
+  btn.appendChild(svg);
+  return btn;
+}
+
 export function initLightbox(galleryRoot) {
   if (!galleryRoot) return;
 
@@ -6,7 +42,6 @@ export function initLightbox(galleryRoot) {
 
   const images = items.map((el) => el.dataset.full || el.querySelector("img").src);
 
-  // Build modal lazily
   let modal = null;
   let stageImg = null;
   let currentIndex = 0;
@@ -17,60 +52,45 @@ export function initLightbox(galleryRoot) {
     modal.setAttribute("role", "dialog");
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-label", "Image viewer");
-    modal.innerHTML = `
-      <button class="lightbox-close" type="button" aria-label="Close">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="18" y1="6" x2="6" y2="18"></line>
-          <line x1="6" y1="6" x2="18" y2="18"></line>
-        </svg>
-      </button>
-      <div class="lightbox-stage">
-        <button class="lightbox-nav prev" type="button" aria-label="Previous">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"></polyline>
-          </svg>
-        </button>
-        <div class="lightbox-img-wrap">
-          <img class="lightbox-img" alt="" />
-        </div>
-        <button class="lightbox-nav next" type="button" aria-label="Next">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </button>
-      </div>
-    `;
+
+    const closeBtn = makeNavButton("lightbox-close", "Close", makeCloseIcon(28));
+    closeBtn.addEventListener("click", close);
+
+    const prevBtn = makeNavButton("lightbox-nav prev", "Previous", makeChevron("prev", 28));
+    prevBtn.addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
+
+    const nextBtn = makeNavButton("lightbox-nav next", "Next", makeChevron("next", 28));
+    nextBtn.addEventListener("click", (e) => { e.stopPropagation(); go(1); });
+
+    stageImg = document.createElement("img");
+    stageImg.className = "lightbox-img";
+    stageImg.alt = "";
+
+    const imgWrap = document.createElement("div");
+    imgWrap.className = "lightbox-img-wrap";
+    imgWrap.appendChild(stageImg);
+
+    const stage = document.createElement("div");
+    stage.className = "lightbox-stage";
+    stage.append(prevBtn, imgWrap, nextBtn);
+
+    modal.append(closeBtn, stage);
     document.body.appendChild(modal);
-    stageImg = modal.querySelector(".lightbox-img");
 
     modal.addEventListener("click", (e) => {
       if (e.target === modal) close();
     });
-    modal.querySelector(".lightbox-close").addEventListener("click", close);
-    modal.querySelector(".prev").addEventListener("click", (e) => {
-      e.stopPropagation();
-      go(-1);
-    });
-    modal.querySelector(".next").addEventListener("click", (e) => {
-      e.stopPropagation();
-      go(1);
-    });
 
-    // Touch swipe
     let touchStartX = 0;
-    let touchEndX = 0;
     modal.addEventListener(
       "touchstart",
-      (e) => {
-        touchStartX = e.changedTouches[0].screenX;
-      },
+      (e) => { touchStartX = e.changedTouches[0].screenX; },
       { passive: true }
     );
     modal.addEventListener(
       "touchend",
       (e) => {
-        touchEndX = e.changedTouches[0].screenX;
-        const delta = touchEndX - touchStartX;
+        const delta = e.changedTouches[0].screenX - touchStartX;
         if (Math.abs(delta) > 40) go(delta < 0 ? 1 : -1);
       },
       { passive: true }
@@ -111,14 +131,6 @@ export function initLightbox(galleryRoot) {
   };
 
   items.forEach((el, idx) => {
-    el.setAttribute("role", "button");
-    el.setAttribute("tabindex", "0");
     el.addEventListener("click", () => open(idx));
-    el.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" || e.key === " ") {
-        e.preventDefault();
-        open(idx);
-      }
-    });
   });
 }

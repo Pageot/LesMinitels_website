@@ -2,10 +2,11 @@ import { enableDragToScroll } from "./utils.js";
 
 const SVG_NS = "http://www.w3.org/2000/svg";
 
-function makeChevron(direction) {
+export function makeChevron(direction, size = 24) {
   const svg = document.createElementNS(SVG_NS, "svg");
-  svg.setAttribute("width", "24");
-  svg.setAttribute("height", "24");
+  const s = String(size);
+  svg.setAttribute("width", s);
+  svg.setAttribute("height", s);
   svg.setAttribute("viewBox", "0 0 24 24");
   svg.setAttribute("fill", "none");
   svg.setAttribute("stroke", "currentColor");
@@ -73,5 +74,9 @@ export function initGallery(galleryRoot) {
   };
   updateArrowState();
   scroller.addEventListener("scroll", updateArrowState, { passive: true });
-  window.addEventListener("resize", updateArrowState);
+  let resizeRaf;
+  window.addEventListener("resize", () => {
+    if (resizeRaf) cancelAnimationFrame(resizeRaf);
+    resizeRaf = requestAnimationFrame(updateArrowState);
+  });
 }

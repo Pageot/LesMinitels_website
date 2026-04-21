@@ -24,9 +24,22 @@
     "meta_platform": "For Apple Silicon Macs",
     "meta_os": "macOS 26 or later",
     "double_tap": "Double-tap",
-    "demo_bad": "I would like to confirmed my presence",
-    "copied_auto": "Copied automatically",
-    "painting": "Claude Monet, <i>The Poplars at Giverny</i>, 1887"
+    "painting": "Claude Monet, <i>The Poplars at Giverny</i>, 1887",
+    "mail": {
+      "new_message": "New message",
+      "to_label": "To",
+      "cc_label": "Cc",
+      "to_chip": "@louis",
+      "cc_chip": "@marie.madeleine",
+      "subject": "Follow-Up on Budget Update",
+      "greeting": "Dear team,",
+      "closing": "Best regards,",
+      "signature": "Molière",
+      "attach": "Attach a file",
+      "attachment": "tartuffe.epub",
+      "send": "Send email",
+      "body_html": "I wanted to <span class=\"tw\"><span class=\"bad\">reccomend</span><span class=\"fix\">recommend</span></span> that we <span class=\"tw\"><span class=\"bad\">defenitely</span><span class=\"fix\">definitely</span></span> schedule the meeting for next <span class=\"tw\"><span class=\"bad\">weak</span><span class=\"fix\">week</span></span> to <span class=\"tw\"><span class=\"bad\">discus</span><span class=\"fix\">discuss</span></span> the <span class=\"tw\"><span class=\"bad\">buget</span><span class=\"fix\">budget</span></span>."
+    }
   },
   "how": {
     "eyebrow": "How it works",

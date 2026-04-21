@@ -46,10 +46,10 @@ export const PROJECTS = {
 
 // Home carousel order — 6 slots, placeholders reserved for upcoming apps.
 export const CAROUSEL_ITEMS = [
-  { slot: 1, project: "convert", label: "Soon", placeholder: true },
-  { slot: 2, project: "convert", label: "Soon", placeholder: true },
+  { slot: 1, project: null, label: "Soon", placeholder: true },
+  { slot: 2, project: null, label: "Soon", placeholder: true },
   { slot: 3, project: "convert", label: "Convert" },
   { slot: 4, project: "spellfix", label: "SpellFix" },
-  { slot: 5, project: "convert", label: "Soon", placeholder: true },
-  { slot: 6, project: "convert", label: "Soon", placeholder: true },
+  { slot: 5, project: null, label: "Soon", placeholder: true },
+  { slot: 6, project: null, label: "Soon", placeholder: true },
 ];

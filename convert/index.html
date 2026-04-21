@@ -67,8 +67,9 @@
 
     document.title = `${proj.name} — Les Minitels`;
 
-    document.getElementById("p-icon").src = proj.icon;
-    document.getElementById("p-icon").alt = `${proj.name} App Icon`;
+    const iconEl = document.getElementById("p-icon");
+    iconEl.src = proj.icon;
+    iconEl.alt = `${proj.name} App Icon`;
     document.getElementById("p-title").textContent = proj.name;
 
     const descEl = document.getElementById("p-description");
@@ -81,12 +82,14 @@
     document.getElementById("p-appstore").href = proj.appStore || "#";
     document.getElementById("p-googleplay").href = proj.googlePlay || "#";
 
-    document.getElementById("p-mockup").src = proj.mockup;
-    document.getElementById("p-mockup").alt = `${proj.name} mockup screen`;
+    const mockupEl = document.getElementById("p-mockup");
+    mockupEl.src = proj.mockup;
+    mockupEl.alt = `${proj.name} mockup screen`;
 
     const galleryScroller = document.getElementById("gallery-scroller");
     proj.showreel.forEach((src, idx) => {
-      const item = document.createElement("div");
+      const item = document.createElement("button");
+      item.type = "button";
       item.className = "gallery-item";
       item.dataset.full = src;
       item.setAttribute("aria-label", `Open screenshot ${idx + 1}`);
@@ -96,7 +99,7 @@
       img.alt = `Screenshot ${idx + 1}`;
       img.loading = "lazy";
 
-      const border = document.createElement("div");
+      const border = document.createElement("span");
       border.className = "gallery-border";
       border.setAttribute("aria-hidden", "true");
 

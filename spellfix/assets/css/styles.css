@@ -43,6 +43,9 @@ p { margin: 0; }
   color: var(--ink-mute);
   font-weight: 500;
 }
+.eyebrow.green { color: var(--accent-green-deep); }
+.eyebrow.blue { color: var(--accent-blue-deep); }
+.eyebrow.warm { color: var(--accent-warm-deep); }
 .mono { font-family: var(--font-mono); font-size: 13px; letter-spacing: -0.01em; }
 
 /* Layout helpers */
@@ -166,7 +169,12 @@ section { position: relative; }
 
 /* Hero */
 .hero {
-  padding: clamp(96px, 10vw, 140px) 0 clamp(72px, 9vw, 128px);
+  padding: 140px 0 0;
+}
+.hero .display.h1 {
+  font-size: 68px;
+  line-height: 1;
+  letter-spacing: -1px;
 }
 .hero-grid {
   display: grid;
@@ -209,7 +217,7 @@ section { position: relative; }
 }
 .hero-visual .paint-bg {
   position: absolute; inset: 0;
-  background: url("../images/monet-field.jpg") center/cover;
+  background: url("../images/monet-poplars-giverny.jpg") center/cover;
 }
 .hero-visual .paint-bg::after {
   content: "";
@@ -217,73 +225,311 @@ section { position: relative; }
   background: linear-gradient(180deg, rgba(247,243,236,0.05) 0%, rgba(247,243,236,0.35) 100%);
 }
 
-/* Demo card (floating over painting) */
-.demo-card {
-  position: absolute;
-  left: 7%;
-  right: 7%;
-  bottom: 7%;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(18px);
-  border: 1px solid rgba(255,255,255,0.7);
-  border-radius: var(--radius-lg);
-  padding: 20px 22px;
-  box-shadow: 0 10px 30px -10px rgba(26,26,26,0.25);
-}
-.demo-card .tag {
-  display: inline-flex; align-items: center; gap: 6px;
-  font-size: 11px; color: var(--ink-mute); letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 10px;
-}
-.demo-card .tag .pulse {
-  width: 7px; height: 7px; border-radius: 50%;
-  background: var(--accent-green);
-  box-shadow: 0 0 0 3px rgba(123,196,156,0.25);
-  animation: pulse 2.4s infinite;
-}
+/* Shared keyframes (pulse for green dot, fixPop for corrected text swap) */
 @keyframes pulse {
   0%, 100% { transform: scale(1); opacity: 1; }
   50% { transform: scale(1.25); opacity: 0.7; }
 }
-.demo-text {
-  font-family: var(--font-display);
-  font-size: clamp(17px, 1.6vw, 20px);
-  line-height: 1.45;
-  color: var(--ink);
-  min-height: 3.2em;
-}
-.demo-text .bad {
-  position: relative;
-  color: var(--ink-soft);
-}
-.demo-text .bad::after {
-  content: "";
-  position: absolute; left: 0; right: 0; bottom: -2px;
-  height: 2px;
-  background: repeating-linear-gradient(90deg, var(--accent-warm-deep) 0 3px, transparent 3px 5px);
-  opacity: 0.85;
-}
-.demo-text .fix {
-  color: var(--accent-green-deep);
-  background: linear-gradient(180deg, transparent 70%, rgba(123,196,156,0.22) 70%);
-  padding: 0 2px;
-  border-radius: 2px;
-  animation: fixPop 0.6s ease forwards;
-}
 @keyframes fixPop {
-  from { opacity: 0; transform: translateY(4px); }
+  from { opacity: 0; transform: translateY(3px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
-.demo-foot {
-  display: flex; align-items: center; justify-content: space-between;
-  margin-top: 14px;
-  font-size: 12px;
-  color: var(--ink-mute);
+/* Figma-anchored scale factor on .hero-visual.
+   Reference: Figma frame is 510×536. All Figma px values stay correct at this
+   container width; --scale scales them on wider/narrower viewports. */
+.hero-visual { container-type: inline-size; container-name: hero-visual; }
+.hero-visual { --scale: clamp(0.62, 100cqw / 510px, 1.3); }
+
+/* Double-tap pill. Figma: top 49 / left 130 in 510×536; h 48, px 16, gap 17,
+   bg rgba(245,241,232,0.7), border 2 #ece6d7, radius 8, backdrop-blur 2.
+   The keycap (72px) overflows the pill (48px) vertically — that's intentional. */
+.dt-pill {
+  position: absolute;
+  left: 25.5%; top: 12.5%;
+  display: inline-flex; align-items: center;
+  gap: calc(17px * var(--scale));
+  height: calc(48px * var(--scale));
+  padding: 0 calc(16px * var(--scale));
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 2px solid #ece6d7;
+  border-radius: calc(8px * var(--scale));
+  box-shadow: 0 calc(2px * var(--scale)) calc(8px * var(--scale)) rgba(26,26,26,0.08);
+  z-index: 3;
+  white-space: nowrap;
+  overflow: visible;
 }
-.demo-foot .cp {
-  display: inline-flex; align-items: center; gap: 6px;
+.dt-pulse {
+  width: calc(8px * var(--scale)); height: calc(8px * var(--scale));
+  border-radius: 50%;
+  background: var(--accent-green);
+  box-shadow: 0 0 0 calc(3px * var(--scale)) rgba(123,196,156,0.25);
+  animation: pulse 2.4s infinite;
+  flex-shrink: 0;
+}
+.dt-label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: calc(20px * var(--scale));
+  color: #7a7468;
+  line-height: 1;
+}
+.dt-keycap {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: calc(72px * var(--scale));
+  height: calc(72px * var(--scale));
+  border-radius: calc(14px * var(--scale));
+  background: linear-gradient(180deg, #ffffff 0%, #f6f0e3 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 calc(1px * var(--scale)) 0 rgba(26,26,26,0.14), inset 0 calc(-3px * var(--scale)) 0 rgba(0,0,0,0.05);
+  font-family: var(--font-body);
+  font-size: calc(32px * var(--scale));
+  color: #000;
+  font-weight: 500;
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+}
+.dt-keycap.pressed {
+  transform: translateY(calc(2px * var(--scale))) scale(0.97);
+  box-shadow: 0 0 0 rgba(0,0,0,0), inset 0 -1px 0 rgba(0,0,0,0.08);
+  background: linear-gradient(180deg, #f0e9dc 0%, #e7e0d1 100%);
+}
+
+/* Mail mock. Figma: position left 25 / right 26 (in 510 wide), full width 459,
+   rounded-top-12, border 1 #c1c1c1. Base font-size 14px = 1em at Figma ref. */
+.mail-mock {
+  position: absolute;
+  left: 4.9%; right: 5.1%;
+  bottom: 0;
+  background: #ffffff;
+  border: 1px solid #c1c1c1;
+  border-bottom: 0;
+  border-radius: calc(12px * var(--scale)) calc(12px * var(--scale)) 0 0;
+  overflow: hidden;
+  box-shadow: 0 calc(-2px * var(--scale)) calc(12px * var(--scale)) rgba(26,26,26,0.06);
+  font-size: calc(14px * var(--scale));
+  line-height: 1.4;
+  color: #2f2f2f;
+  z-index: 2;
+}
+/* Topbar: pl-24 pr-12 py-12, bg #2f2f2f, title 14 medium white, icons gap-12. */
+.mail-topbar {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0.857em 0.857em 0.857em 1.714em;
+  background: #2f2f2f;
+  color: #ffffff;
+}
+.mail-topbar-title {
+  font-weight: 500;
+  font-size: 1em;
+}
+.mail-topbar-icons {
+  display: inline-flex; align-items: center;
+  gap: 0.857em;
+  color: #ffffff;
+}
+/* Body: pt-12, gap-12 between sections, px-24, pb before toolbar = 16 (outer gap). */
+.mail-body {
+  display: flex; flex-direction: column;
+  gap: 0.857em;
+  padding: 0.857em 1.714em 1.143em;
+}
+.mail-fields {
+  display: flex; flex-direction: column;
+  gap: 0.571em; /* 8px */
+}
+.mail-field {
+  display: flex; align-items: center;
+  gap: 0.714em; /* 10px */
+}
+.mail-field-label {
+  font-weight: 500;
+  font-size: 0.857em; /* 12px */
+  color: #2f2f2f;
+}
+.mail-chip {
+  display: inline-flex; align-items: center;
+  padding: 0.286em 0.571em; /* 4px 8px */
+  font-size: 0.857em; /* 12px */
+  font-weight: 500;
+  border-radius: 4px;
+  line-height: 1;
+}
+.mail-chip--to {
+  background: rgba(41, 136, 203, 0.16);
+  color: #2988cb;
+}
+.mail-chip--cc {
+  background: rgba(129, 226, 124, 0.21);
+  color: #24d17f;
+}
+.mail-divider {
+  height: 1px;
+  background: #e4e4e4;
+  margin: 0; /* gap handled by parent mail-body */
+}
+.mail-subject {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 1.286em; /* 18px */
+  color: #2f2f2f;
+  line-height: 1.25;
+}
+.mail-text {
+  position: relative;
+  font-weight: 500;
+  font-size: 1em; /* 14px */
+  color: #2f2f2f;
+  line-height: 1.4;
+}
+.mail-text p { margin: 0; position: relative; z-index: 1; }
+.mail-text .mail-blank { line-height: 0.4em; height: 0.4em; }
+
+/* OS-style drag-selection overlay. JS measures line rects at start of each
+   selecting phase and generates .mail-selection__line children. */
+.mail-selection {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+.mail-selection__line {
+  position: absolute;
+  background: rgba(41, 136, 203, 0.22);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  border-radius: 1px;
+  will-change: transform, opacity;
+}
+.mail-mock.is-selecting .mail-selection__line {
+  animation: selFill 360ms ease-out both;
+  animation-delay: var(--sel-delay, 0ms);
+}
+.mail-mock.has-selection .mail-selection__line {
+  transform: scaleX(1);
+  opacity: 1;
+}
+.mail-mock.is-fading-selection .mail-selection__line {
+  animation: selFade 400ms ease-out forwards;
+}
+@keyframes selFill {
+  from { transform: scaleX(0); opacity: 0.85; }
+  to { transform: scaleX(1); opacity: 1; }
+}
+@keyframes selFade {
+  from { transform: scaleX(1); opacity: 1; }
+  to { transform: scaleX(1); opacity: 0; }
+}
+.mail-attach {
+  display: inline-flex; align-items: center;
+  gap: 0.571em; /* 8px */
+  flex-wrap: wrap;
+}
+.mail-attach-btn {
+  display: inline-flex; align-items: center;
+  gap: 0.286em; /* 4px */
+  padding: 0.429em 0.714em; /* 6px 10px */
+  background: #f3f3f3;
+  border-radius: 4px;
+  font-size: 0.714em; /* 10px */
+  font-weight: 500;
+  color: #2f2f2f;
+}
+.mail-chip-file {
+  display: inline-flex; align-items: center;
+  gap: 0.286em; /* 4px */
+  padding: 0.429em 0.714em; /* 6px 10px */
+  border: 1px solid #c1c1c1;
+  border-radius: 4px;
+  font-size: 0.714em; /* 10px */
+  font-weight: 500;
+  color: #2f2f2f;
+}
+/* Toolbar: px-24 py-12, bg #f3f3f3 border-t #c1c1c1, groups gap-8, icons 16. */
+.mail-toolbar {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0.571em;
+  padding: 0.857em 1.714em;
+  background: #f3f3f3;
+  border-top: 1px solid #c1c1c1;
+}
+.mail-toolbar-group {
+  display: inline-flex; align-items: center;
+  gap: 0.571em;
+  color: #2f2f2f;
+}
+.mail-ic {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 1.143em; height: 1.143em; /* 16px */
+  font-size: 1em;
+  font-weight: 500;
+  color: #2f2f2f;
+}
+.mail-ic-bold { font-weight: 700; font-family: var(--font-body); }
+.mail-ic-italic { font-style: italic; font-family: var(--font-display); }
+.mail-ic-under { text-decoration: underline; font-family: var(--font-body); }
+/* Send button: px-12 py-6, bg #2988cb, text 14 medium white, radius 6. */
+.mail-send {
+  display: inline-flex; align-items: center;
+  padding: 0.429em 0.857em; /* 6px 12px */
+  background: #2988cb;
+  color: #ffffff;
+  font-size: 1em;
+  font-weight: 500;
+  border-radius: 0.429em; /* 6px */
+  white-space: nowrap;
+}
+
+/* Typo words — wavy red underline + fix-swap state.
+   No per-word blue highlight: the whole-body selection overlay handles that. */
+.mail-text .tw {
+  position: relative;
+}
+.mail-text .tw .fix { display: none; }
+.mail-text .tw .bad {
+  text-decoration: underline wavy #ff5f5f;
+  text-decoration-thickness: 10%;
+  text-decoration-skip-ink: none;
+  text-underline-offset: 0.18em;
+  -webkit-text-decoration: underline wavy #ff5f5f;
+  -webkit-text-decoration-thickness: 10%;
+  -webkit-text-decoration-skip-ink: none;
+}
+.mail-mock.is-fixed .mail-text .tw .bad { display: none; }
+.mail-mock.is-fixed .mail-text .tw .fix {
+  display: inline;
+  animation: fixPop 0.5s ease both;
+}
+
+/* Mouse cursor. Positioned absolutely inside .mail-mock; JS sets --cx/--cy
+   and toggles .has-cursor to fade in / out. */
+.mail-cursor {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: calc(22px * var(--scale));
+  height: auto;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate(var(--cx, 0px), var(--cy, 0px));
+  transition: opacity 200ms ease, transform 1100ms cubic-bezier(0.25, 0.1, 0.25, 1);
+  z-index: 4;
+  will-change: transform, opacity;
+  filter: drop-shadow(0 calc(1px * var(--scale)) calc(2px * var(--scale)) rgba(0,0,0,0.2));
+}
+.mail-mock.has-cursor .mail-cursor {
+  opacity: 1;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dt-pulse { animation: none; }
+  .dt-keycap { transition: none; }
+  .mail-text .tw .bad { display: none; }
+  .mail-text .tw .fix { display: inline; animation: none; }
+  .mail-cursor,
+  .mail-selection { display: none; }
 }
 
 /* Keycap demo (keycaps that press) */
@@ -341,7 +587,13 @@ section { position: relative; }
   display: flex; align-items: center; justify-content: center;
   margin-bottom: 16px;
 }
-.how-card h3 { font-size: 22px; font-weight: 500; margin-bottom: 6px; }
+.how-card .illus .keycap-row-lg {
+  display: inline-flex; align-items: center; gap: 10px;
+}
+.how-card .illus .keycap.lg {
+  width: 44px; height: 40px; font-size: 18px;
+}
+.how-card h3 { font-size: 22px; font-weight: 500; margin: 0 0 4px; }
 .how-card p { color: var(--ink-soft); font-size: 15px; line-height: 1.55; }
 
 /* Section header */
@@ -475,7 +727,7 @@ section { position: relative; }
   color: var(--ink);
   box-shadow: 0 1px 3px rgba(26,26,26,0.08);
 }
-.mockup-tabs button.active .tick { color: var(--accent-green-deep); }
+.tick, .mockup-tabs button.active .tick { color: var(--accent-green-deep); }
 .mockup-box {
   background: rgba(255,255,255,0.75);
   border: 1px solid var(--border);
@@ -487,6 +739,40 @@ section { position: relative; }
   line-height: 1.5;
 }
 .mockup-box.out { margin-top: 10px; color: var(--ink); font-weight: 450; }
+.mockup-box.out.green { color: var(--accent-green-deep); }
+.mockup-box.out.blue { color: var(--accent-blue-deep); }
+.mockup-box.row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: auto;
+  padding: 10px 12px;
+}
+.mockup-rows { display: flex; flex-direction: column; gap: 6px; }
+.mockup-tabs button.active.blue { color: var(--accent-blue-deep); }
+.mockup-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--ink-mute);
+  font-weight: 400;
+}
+.tone-output {
+  margin-top: 22px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 20px;
+  color: var(--ink);
+  line-height: 1.45;
+  transition: opacity 0.25s;
+}
+.mono-sm-mute { font-size: 10.5px; color: var(--ink-mute); }
+.dot-green { color: var(--accent-green-deep); }
+.mockup.narrow { width: min(82%, 380px); }
+.moliere-sm {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 13.5px;
+}
 .mockup-tones {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -523,6 +809,10 @@ section { position: relative; }
   font-family: var(--font-display);
   font-style: italic;
   text-shadow: 0 1px 2px rgba(0,0,0,0.4);
+}
+.hero-visual .painting-caption {
+  left: auto; bottom: auto;
+  top: 14px; right: 16px;
 }
 
 /* Privacy */
