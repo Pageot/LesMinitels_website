@@ -2,6 +2,8 @@
 const ASSETS =
   "https://raw.githubusercontent.com/Pageot/WebsiteLesMinitels-assets/refs/heads/main";
 
+export const PLACEHOLDER_SHOWREEL = "/assets/img/FutureApp_showreel.webp";
+
 export const PROJECTS = {
   convert: {
     id: "convert",
@@ -38,8 +40,7 @@ export const PROJECTS = {
   spellfix: {
     id: "spellfix",
     name: "SpellFix",
-    // No showreel yet — the carousel falls back to the placeholder visual.
-    showreel: [],
+    showreel: ["/assets/img/SpellFix_showreel.webp"],
     ready: true,
   },
 };

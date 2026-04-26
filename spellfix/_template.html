@@ -5,8 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ head.title }}</title>
 <meta name="description" content="{{ head.description }}">
+<link rel="icon" href="{{ paths.assets }}/images/spellfix-icon.svg" type="image/svg+xml">
 <link rel="alternate" hreflang="fr" href="{{ paths.fr_home }}">
 <link rel="alternate" hreflang="en" href="{{ paths.en_home }}">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Les Minitels">
+<meta property="og:title" content="{{ social.og_title }}">
+<meta property="og:description" content="{{ social.og_description }}">
+<meta property="og:url" content="{{ social.og_url }}">
+<meta property="og:image" content="{{ social.og_image }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="{{ social.og_image_alt }}">
+<meta property="og:locale" content="{{ social.og_locale }}">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ social.og_title }}">
+<meta name="twitter:description" content="{{ social.og_description }}">
+<meta name="twitter:image" content="{{ social.og_image }}">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,9 +34,15 @@
 <body>
 <header class="site-header">
   <div class="container nav">
-    <a href="{{ paths.home }}" class="brand" aria-label="SpellFix">
-      <img src="{{ paths.assets }}/images/spellfix-logo.svg" alt="SpellFix" height="22">
-    </a>
+    <div class="brand-group">
+      <a href="{{ paths.site_home }}" class="brand-mark" aria-label="Les Minitels">
+        <img src="{{ paths.site_assets }}/img/logo.svg" alt="" height="32">
+      </a>
+      <span class="brand-sep" aria-hidden="true"></span>
+      <a href="{{ paths.home }}" class="brand" aria-label="SpellFix">
+        <img src="{{ paths.assets }}/images/spellfix-logo.svg" alt="SpellFix" height="26">
+      </a>
+    </div>
     <div class="nav-right">
       <div class="lang-switch" role="group" aria-label="{{ nav.lang_label }}">
         <button class="{{ nav.fr_active }}" data-lang-switch="fr" data-href="{{ paths.fr_home }}">FR</button>
@@ -142,7 +164,6 @@
         </div>
       </div>
 
-      <div class="painting-caption">{{ hero.painting }}</div>
     </div>
   </div>
 </section>
@@ -154,44 +175,42 @@
       <span class="eyebrow">{{ how.eyebrow }}</span>
       <h2 class="display h2">{{ how.title }}</h2>
     </div>
-    <div class="how-grid">
-      <article class="how-card reveal">
-        <span class="how-num">i.</span>
-        <div class="illus">
-          <svg width="100" height="56" viewBox="0 0 160 90" fill="none">
-            <rect x="10" y="14" width="140" height="62" rx="6" fill="rgba(255,255,255,0.6)" stroke="#E3DCCC"/>
-            <rect x="22" y="28" width="110" height="6" rx="2" fill="#E3DCCC"/>
-            <rect x="22" y="42" width="86" height="6" rx="2" fill="#D6B06B" opacity="0.7"/>
-            <rect x="22" y="56" width="54" height="6" rx="2" fill="#E3DCCC"/>
-          </svg>
+    <div class="how-grid" data-how-anim>
+
+      <article class="how-step reveal">
+        <div class="how-step__illus" aria-hidden="true">
+          {{> mail-mock-mini }}
         </div>
-        <h3>{{ how.step1_title }}</h3>
-        <p>{{ how.step1_body }}</p>
-      </article>
-      <article class="how-card reveal">
-        <span class="how-num">ii.</span>
-        <div class="illus">
-          <div class="keycap-row-lg">
-            <span class="keycap lg">⌥</span>
-            <span class="keycap lg">⌥</span>
-          </div>
+        <div class="how-step__body">
+          <span class="how-step__num">1.</span>
+          <h3>{{ how.step1_title }}</h3>
+          <p>{{ how.step1_body }}</p>
         </div>
-        <h3>{{ how.step2_title }}</h3>
-        <p>{{ how.step2_body }}</p>
       </article>
-      <article class="how-card reveal">
-        <span class="how-num">iii.</span>
-        <div class="illus">
-          <svg width="110" height="56" viewBox="0 0 160 90" fill="none">
-            <rect x="10" y="14" width="140" height="62" rx="6" fill="rgba(255,255,255,0.6)" stroke="#E3DCCC"/>
-            <rect x="22" y="28" width="110" height="6" rx="2" fill="#7BC49C" opacity="0.8"/>
-            <rect x="22" y="42" width="90" height="6" rx="2" fill="#7BC49C" opacity="0.6"/>
-            <rect x="22" y="56" width="64" height="6" rx="2" fill="#7BC49C" opacity="0.4"/>
-          </svg>
+
+      <article class="how-step reveal">
+        <div class="how-step__illus" aria-hidden="true">
+          <span class="dt-keycap how-step__keycap" data-how-keycap>⌥</span>
         </div>
-        <h3>{{ how.step3_title }}</h3>
-        <p>{{ how.step3_body }}</p>
+        <div class="how-step__body">
+          <span class="how-step__num">2.</span>
+          <h3>{{ how.step2_title }}</h3>
+          <p>{{ how.step2_body }}</p>
+        </div>
       </article>
+
+      <article class="how-step reveal">
+        <div class="how-step__illus" aria-hidden="true">
+          {{> mail-mock-mini hooks="data-how-mail" }}
+          <img class="how-step__badge" src="{{ paths.assets }}/images/check-badge.svg" alt="" data-how-badge>
+        </div>
+        <div class="how-step__body">
+          <span class="how-step__num">3.</span>
+          <h3>{{ how.step3_title }}</h3>
+          <p>{{ how.step3_body }}</p>
+        </div>
+      </article>
+
     </div>
   </div>
 </section>
@@ -206,29 +225,28 @@
         <span class="eyebrow green">{{ features.correction.eyebrow }}</span>
         <h3>{{ features.correction.title }}</h3>
         <p>{{ features.correction.body }}</p>
-        <div class="feature-pills">
-          <span class="pill active"><span class="tick">✓</span> {{ features.correction.pill1 }}</span>
-          <span class="pill">{{ features.correction.pill2 }}</span>
-          <span class="pill">{{ features.correction.pill3 }}</span>
-          <span class="pill">{{ features.correction.pill4 }}</span>
-        </div>
       </div>
-      <div class="feature-visual">
-        <div class="paint field"></div>
-        <div class="mockup">
-          <div class="mockup-head">
-            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
-            <span class="cog">⚙</span>
+      <div class="spellfix-demo" aria-label="{{ features.correction.demo_aria }}">
+        <div class="spellfix-demo__paint paint field" aria-hidden="true"></div>
+        <div class="spellfix-demo__frame">
+          {{> demo-head }}
+          <div class="spellfix-demo__panel spellfix-demo__panel--top">
+            <div class="spellfix-demo__tabs" aria-hidden="true">
+              <span class="spellfix-demo__tab is-active"><img class="tab-ico" src="{{ paths.assets }}/images/check-badge.svg" alt="" width="10" height="10"> {{ features.correction.demo_tab_fix }}</span>
+              <span class="spellfix-demo__tab"><img class="tab-ico" src="{{ paths.assets }}/images/Translate_icon.svg" alt="" width="10" height="10"> {{ features.correction.demo_tab_translate }}</span>
+            </div>
+            <div class="spellfix-demo__input">{{ features.correction.demo_input }}</div>
           </div>
-          <div class="mockup-tabs">
-            <button class="active"><span class="tick">✓</span> {{ features.correction.tab_fix }}</button>
-            <button>{{ features.correction.tab_translate }}</button>
+          <div class="spellfix-demo__panel spellfix-demo__panel--bottom">
+            <div class="spellfix-demo__tones" aria-hidden="true">
+              <span class="spellfix-demo__tone"><img class="tone-ico" src="{{ paths.assets }}/images/Bag_icon.svg" alt="" width="14" height="14"> {{ features.correction.demo_tone1_label }}</span>
+              <span class="spellfix-demo__tone"><img class="tone-ico" src="{{ paths.assets }}/images/Shorter_icon.svg" alt="" width="14" height="14"> {{ features.correction.demo_tone2_label }}</span>
+              <span class="spellfix-demo__tone spellfix-demo__tone--full"><img class="tone-ico" src="{{ paths.assets }}/images/friendly_icon.svg" alt="" width="14" height="14"> {{ features.correction.demo_tone3_label }}</span>
+            </div>
+            <div class="spellfix-demo__output">{{ features.correction.demo_output_default }}</div>
+            <span class="spellfix-demo__copy" aria-hidden="true"><img class="tone-ico" src="{{ paths.assets }}/images/copy_icon.svg" alt="" width="14" height="14"> {{ features.correction.demo_copy }}</span>
           </div>
-          <div class="mockup-box">{{ features.correction.mockup_bad }}</div>
-          <div class="mockup-box out green">{{ features.correction.mockup_fixed }}</div>
-          <div class="mockup-foot"><span class="copy">⧉ {{ features.correction.mockup_copied }}</span></div>
         </div>
-        <div class="painting-caption">{{ features.correction.painting }}</div>
       </div>
     </div>
 
@@ -238,33 +256,59 @@
         <span class="eyebrow green">{{ features.tones.eyebrow }}</span>
         <h3>{{ features.tones.title }}</h3>
         <p>{{ features.tones.body }}</p>
-        <div class="feature-pills" data-tones>
-          <button class="pill active" data-tone="original">{{ features.tones.tone_original }}</button>
-          <button class="pill" data-tone="professional">{{ features.tones.tone_professional }}</button>
-          <button class="pill" data-tone="concise">{{ features.tones.tone_concise }}</button>
-          <button class="pill" data-tone="friendly">{{ features.tones.tone_friendly }}</button>
-          <button class="pill moliere" data-tone="moliere">{{ features.tones.tone_moliere }}</button>
+        <div class="feature-tones" role="group" aria-label="{{ features.tones.demo_aria }}">
+          <button class="tone-btn" type="button" data-tone="tone1">
+            <img class="tone-ico" src="{{ paths.assets }}/images/Bag_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone1_label }}
+          </button>
+          <button class="tone-btn" type="button" data-tone="tone2">
+            <img class="tone-ico" src="{{ paths.assets }}/images/Shorter_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone2_label }}
+          </button>
+          <button class="tone-btn" type="button" data-tone="tone3">
+            <img class="tone-ico" src="{{ paths.assets }}/images/friendly_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone3_label }}
+          </button>
+          <button class="tone-btn tone-btn--moliere" type="button" data-tone="tone4">
+            {{ features.tones.demo_tone4_label }}
+          </button>
         </div>
-        <p class="tone-output" data-tone-output>
-          {{ features.tones.sample_original }}
-        </p>
       </div>
-      <div class="feature-visual">
-        <div class="paint poppies"></div>
-        <div class="mockup">
-          <div class="mockup-head">
-            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
-            <span class="cog">⚙</span>
+      <div class="spellfix-demo spellfix-demo--tones" aria-label="{{ features.tones.demo_aria }}">
+        <div class="spellfix-demo__paint paint cliffs" aria-hidden="true"></div>
+        <div class="spellfix-demo__frame">
+          {{> demo-head }}
+          <div class="spellfix-demo__panel spellfix-demo__panel--top">
+            <div class="spellfix-demo__tabs" aria-hidden="true">
+              <span class="spellfix-demo__tab is-active"><img class="tab-ico" src="{{ paths.assets }}/images/check-badge.svg" alt="" width="10" height="10"> {{ features.tones.demo_tab_fix }}</span>
+              <span class="spellfix-demo__tab"><img class="tab-ico" src="{{ paths.assets }}/images/Translate_icon.svg" alt="" width="10" height="10"> {{ features.tones.demo_tab_translate }}</span>
+            </div>
+            <div class="spellfix-demo__input">{{ features.tones.demo_input }}</div>
           </div>
-          <div class="mockup-box">{{ features.tones.mockup_intro }}</div>
-          <div class="mockup-tones">
-            <span class="tone">🧳 {{ features.tones.mockup_professional }}</span>
-            <span class="tone">⏱ {{ features.tones.mockup_concise }}</span>
-            <span class="tone full">👤 {{ features.tones.mockup_friendly }}</span>
-            <span class="tone full moliere-sm">{{ features.tones.mockup_moliere }}</span>
+          <div class="spellfix-demo__panel spellfix-demo__panel--bottom">
+            <div class="spellfix-demo__tones" role="group" aria-label="{{ features.tones.eyebrow }}">
+              <button class="tone-btn is-active" type="button" data-tone="tone1"
+                      data-output="{{ features.tones.demo_tone1_output }}"
+                      aria-pressed="true">
+                <img class="tone-ico" src="{{ paths.assets }}/images/Bag_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone1_label }}
+              </button>
+              <button class="tone-btn" type="button" data-tone="tone2"
+                      data-output="{{ features.tones.demo_tone2_output }}"
+                      aria-pressed="false">
+                <img class="tone-ico" src="{{ paths.assets }}/images/Shorter_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone2_label }}
+              </button>
+              <button class="tone-btn" type="button" data-tone="tone3"
+                      data-output="{{ features.tones.demo_tone3_output }}"
+                      aria-pressed="false">
+                <img class="tone-ico" src="{{ paths.assets }}/images/friendly_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_tone3_label }}
+              </button>
+              <button class="tone-btn tone-btn--moliere" type="button" data-tone="tone4"
+                      data-output="{{ features.tones.demo_tone4_output }}"
+                      aria-pressed="false">
+                {{ features.tones.demo_tone4_label }}
+              </button>
+            </div>
+            <div class="spellfix-demo__output" aria-live="polite">{{ features.tones.demo_output_default }}</div>
+            <span class="spellfix-demo__copy" aria-hidden="true"><img class="tone-ico" src="{{ paths.assets }}/images/copy_icon.svg" alt="" width="14" height="14"> {{ features.tones.demo_copy }}</span>
           </div>
         </div>
-        <div class="painting-caption">{{ features.tones.painting }}</div>
       </div>
     </div>
 
@@ -278,23 +322,37 @@
           <span class="pill">{{ features.translation.pill1 }}</span>
           <span class="pill">{{ features.translation.pill2 }}</span>
           <span class="pill">{{ features.translation.pill3 }}</span>
+          <span class="pill">{{ features.translation.pill4 }}</span>
+          <span class="pill">{{ features.translation.pill5 }}</span>
+          <span class="pill">{{ features.translation.pill6 }}</span>
         </div>
       </div>
-      <div class="feature-visual">
-        <div class="paint cliffs"></div>
-        <div class="mockup">
-          <div class="mockup-head">
-            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> SpellFix</span>
-            <span class="cog">⚙</span>
+      <div class="spellfix-demo spellfix-demo--translate" aria-label="{{ features.translation.demo_aria }}">
+        <div class="spellfix-demo__paint paint bridge" aria-hidden="true"></div>
+        <div class="spellfix-demo__frame">
+          {{> demo-head }}
+          <div class="spellfix-demo__panel spellfix-demo__panel--top">
+            <div class="spellfix-demo__tabs" aria-hidden="true">
+              <span class="spellfix-demo__tab"><img class="tab-ico" src="{{ paths.assets }}/images/check-badge-dark.svg" alt="" width="10" height="10"> {{ features.translation.demo_tab_fix }}</span>
+              <span class="spellfix-demo__tab is-active"><img class="tab-ico" src="{{ paths.assets }}/images/Translate_icon-blue.svg" alt="" width="10" height="10"> {{ features.translation.demo_tab_translate }}</span>
+            </div>
+            <div class="spellfix-demo__langs" aria-hidden="true">
+              <span class="spellfix-demo__select">{{ features.translation.demo_lang_src }}<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 4.75l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+              <span class="spellfix-demo__swap"><svg viewBox="0 0 14 14" width="14" height="14" aria-hidden="true"><path d="M4.25 3v8M4.25 3 2.5 4.75M4.25 3 6 4.75M9.75 11V3M9.75 11 8 9.25M9.75 11l1.75-1.75" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </div>
+            <div class="spellfix-demo__input">{{ features.translation.demo_input }}</div>
           </div>
-          <div class="mockup-tabs">
-            <button>{{ features.translation.tab_fix }}</button>
-            <button class="active blue">⟲ {{ features.translation.tab_translate }}</button>
+          <div class="spellfix-demo__panel spellfix-demo__panel--bottom">
+            <span class="spellfix-demo__select spellfix-demo__select--dst" aria-hidden="true">{{ features.translation.demo_lang_dst }}<svg class="caret" viewBox="0 0 12 12" width="12" height="12" aria-hidden="true"><path d="M3 4.75l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <div class="spellfix-demo__tones" aria-hidden="true">
+              <span class="spellfix-demo__tone"><img class="tone-ico" src="{{ paths.assets }}/images/Bag_icon.svg" alt="" width="14" height="14"> {{ features.translation.demo_tone1_label }}</span>
+              <span class="spellfix-demo__tone"><img class="tone-ico" src="{{ paths.assets }}/images/Shorter_icon.svg" alt="" width="14" height="14"> {{ features.translation.demo_tone2_label }}</span>
+              <span class="spellfix-demo__tone spellfix-demo__tone--full"><img class="tone-ico" src="{{ paths.assets }}/images/friendly_icon.svg" alt="" width="14" height="14"> {{ features.translation.demo_tone3_label }}</span>
+            </div>
+            <div class="spellfix-demo__output">{{ features.translation.demo_output_default }}</div>
+            <span class="spellfix-demo__copy" aria-hidden="true"><img class="tone-ico" src="{{ paths.assets }}/images/copy_icon.svg" alt="" width="14" height="14"> {{ features.translation.demo_copy }}</span>
           </div>
-          <div class="mockup-box"><span class="mockup-tag">{{ features.translation.mockup_src_tag }}</span> · {{ features.translation.mockup_src }}</div>
-          <div class="mockup-box out blue"><span class="mockup-tag">{{ features.translation.mockup_dst_tag }}</span> · {{ features.translation.mockup_dst }}</div>
         </div>
-        <div class="painting-caption">{{ features.translation.painting }}</div>
       </div>
     </div>
 
@@ -306,28 +364,8 @@
         <p>{{ features.local_ai.body }}</p>
       </div>
       <div class="feature-visual">
-        <div class="paint field"></div>
-        <div class="mockup narrow">
-          <div class="mockup-head">
-            <span class="title"><img src="{{ paths.assets }}/images/spellfix-icon.svg" class="dot" alt=""> {{ features.local_ai.mockup_title }}</span>
-            <span class="cog">⚙</span>
-          </div>
-          <div class="mockup-rows">
-            <div class="mockup-box row">
-              <span><span class="dot-green">●</span> Apple Foundation</span>
-              <span class="mono mono-sm-mute">{{ features.local_ai.active }} · 2.1 GB</span>
-            </div>
-            <div class="mockup-box row">
-              <span>Qwen 3.5</span>
-              <span class="mono mono-sm-mute">4.8 GB · ↓</span>
-            </div>
-            <div class="mockup-box row">
-              <span>Gemma 4</span>
-              <span class="mono mono-sm-mute">3.2 GB · ↓</span>
-            </div>
-          </div>
-        </div>
-        <div class="painting-caption">{{ features.local_ai.painting }}</div>
+        <div class="paint potager"></div>
+        <img class="local-ai-mockup" src="{{ paths.assets }}/images/local-ai-mockup.svg" alt="{{ features.local_ai.mockup_title }}">
       </div>
     </div>
 

@@ -1,0 +1,18 @@
+<div class="mail-mock mini" {{ $hooks }}>
+  <div class="mail-topbar">
+    <span class="mail-topbar-title">{{ hero.mail.new_message }}</span>
+    <span class="mail-topbar-icons">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </span>
+  </div>
+  <div class="mail-body">
+    <div class="mail-text">
+      <p>{{ hero.mail.greeting }}</p>
+      <p>{{ hero.mail.body_html }}</p>
+      <p class="mail-blank">&nbsp;</p>
+      <p>{{ hero.mail.closing }}</p>
+      <p>{{ hero.mail.signature }}</p>
+    </div>
+  </div>
+</div>

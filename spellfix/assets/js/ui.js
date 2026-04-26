@@ -5,6 +5,14 @@
   const currentLang = document.documentElement.lang === 'en' ? 'en' : 'fr';
   const otherLang = currentLang === 'fr' ? 'en' : 'fr';
 
+  const wait = (ms) => new Promise(r => setTimeout(r, ms));
+  const press = (el) => {
+    if (!el) return;
+    el.classList.add('pressed');
+    setTimeout(() => el.classList.remove('pressed'), 140);
+  };
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   // i18n redirect: honor stored preference, else sniff browser on first visit.
   (function redirectIfNeeded() {
     try {
@@ -32,11 +40,6 @@
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
 
-  document.querySelectorAll('.marker').forEach((el) => {
-    if (el.classList.contains('u1') || el.classList.contains('u2')) return;
-    el.classList.add(Math.random() < 0.5 ? 'u1' : 'u2');
-  });
-
   if ('IntersectionObserver' in window) {
     const io = new IntersectionObserver((entries) => {
       entries.forEach(e => {
@@ -51,6 +54,43 @@
     document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
   }
 
+  const howTrigger = document.querySelector('[data-how-anim]');
+  if (howTrigger) {
+    const howKeycap = howTrigger.querySelector('[data-how-keycap]');
+    const howMail = howTrigger.querySelector('[data-how-mail]');
+    const howBadge = howTrigger.querySelector('[data-how-badge]');
+    const runHowOnce = async () => {
+      if (reduceMotion) {
+        howMail?.classList.add('is-fixed');
+        howBadge?.classList.add('is-shown');
+        return;
+      }
+      await wait(1000);
+      press(howKeycap); await wait(340);
+      press(howKeycap); await wait(660);
+      howMail?.classList.add('is-clearing');
+      await wait(500);
+      howMail?.classList.add('is-fixed');
+      howMail?.classList.remove('is-clearing');
+      await wait(900);
+      howBadge?.classList.add('is-shown');
+    };
+
+    if ('IntersectionObserver' in window) {
+      const howIo = new IntersectionObserver((entries) => {
+        for (const e of entries) {
+          if (e.isIntersecting) {
+            howIo.unobserve(e.target);
+            runHowOnce();
+          }
+        }
+      }, { threshold: 0.2 });
+      howIo.observe(howTrigger);
+    } else {
+      runHowOnce();
+    }
+  }
+
   document.querySelectorAll('[data-lang-switch]').forEach(btn => {
     btn.addEventListener('click', () => {
       try { localStorage.setItem(LANG_KEY, btn.dataset.langSwitch); } catch (e) {}
@@ -60,14 +100,8 @@
   });
 
   const mail = document.querySelector('[data-mail]');
-  if (mail && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  if (mail && !reduceMotion) {
     const keycap = document.querySelector('.dt-keycap');
-    const wait = (ms) => new Promise(r => setTimeout(r, ms));
-    const press = (el) => {
-      if (!el) return;
-      el.classList.add('pressed');
-      setTimeout(() => el.classList.remove('pressed'), 140);
-    };
 
     // Pause when tab hidden or element off-screen
     let onScreen = true;
@@ -225,39 +259,35 @@
     })();
   }
 
-  const tonesWrap = document.querySelector('[data-tones]');
-  if (tonesWrap) {
-    const target = document.querySelector('[data-tone-output]');
-    const pills = tonesWrap.querySelectorAll('.pill');
-    const texts = {
-      fr: {
-        original: "Je vous contacte car j'aimerais bien savoir si vous avez eu le temps de regarder ma proposition envoyée la semaine dernière.",
-        professional: "Je vous écris afin de savoir si vous avez pu prendre connaissance de ma proposition adressée la semaine passée.",
-        concise: "Avez-vous eu le temps de relire ma proposition de la semaine dernière ?",
-        friendly: "Petit message rapide pour savoir si vous avez eu l'occasion de jeter un œil à ma proposition ! 🙂",
-        moliere: "Céans je m'adresse à vous, eussiez-vous eu loisir d'ouïr ma missive mandée la semaine dernière ?"
-      },
-      en: {
-        original: "I'm reaching out because I'd really like to know if you had the time to take a look at the proposal I sent last week.",
-        professional: "I am writing to enquire whether you have had the opportunity to review the proposal I sent last week.",
-        concise: "Did you get a chance to review my proposal from last week?",
-        friendly: "Just a quick note — did you get a chance to peek at the proposal I sent last week? 🙂",
-        moliere: "Pray tell, hath thou found the leisure to peruse the missive I did dispatch but one week past?"
-      }
-    };
-    pills.forEach(p => {
-      p.addEventListener('click', () => {
-        pills.forEach(x => x.classList.remove('active'));
-        p.classList.add('active');
-        const k = p.dataset.tone;
-        if (target) {
-          target.style.opacity = '0';
-          setTimeout(() => {
-            target.textContent = texts[currentLang][k] || texts[currentLang].original;
-            target.style.opacity = '1';
-          }, 180);
-        }
+  document.querySelectorAll('.spellfix-demo--tones').forEach(demo => {
+    const innerButtons = Array.from(demo.querySelectorAll('.tone-btn[data-tone]'));
+    const feature = demo.closest('.feature');
+    const outerButtons = feature
+      ? Array.from(feature.querySelectorAll('.feature-tones .tone-btn'))
+      : [];
+    const allButtons = innerButtons.concat(outerButtons);
+    const output = demo.querySelector('.spellfix-demo__output');
+    let fadeTimer = null;
+
+    const applyTone = (tone) => {
+      const target = innerButtons.find(b => b.dataset.tone === tone);
+      if (!target) return;
+      allButtons.forEach(b => {
+        const isActive = b.dataset.tone === tone;
+        b.classList.toggle('is-active', isActive);
+        b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
       });
+      if (!output) return;
+      clearTimeout(fadeTimer);
+      output.style.opacity = '0';
+      fadeTimer = setTimeout(() => {
+        output.textContent = target.dataset.output || '';
+        output.style.opacity = '1';
+      }, 180);
+    };
+
+    allButtons.forEach(btn => {
+      btn.addEventListener('click', () => applyTone(btn.dataset.tone));
     });
-  }
+  });
 })();

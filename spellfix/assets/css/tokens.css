@@ -7,10 +7,11 @@
   --ink: #1A1A1A;
   --ink-soft: #4A4A4A;
   --ink-mute: #7A7468;
-  --accent-green: #7BC49C;
-  --accent-green-deep: #5FA882;
+  --accent-green: #24D17F;
+  --accent-green-deep: #1AA865;
   --accent-blue: #7CA9D5;
   --accent-blue-deep: #5D8BBB;
+  --accent-blue-bright: #2988CB;
   --accent-warm: #D6B06B;
   --accent-warm-deep: #B88E4A;
   --border: #E3DCCC;
@@ -48,6 +49,7 @@
   --radius-xl: 28px;
   --shadow-card: 0 1px 2px rgba(26,26,26,0.04), 0 12px 40px -16px rgba(26,26,26,0.15);
   --shadow-float: 0 2px 4px rgba(26,26,26,0.06), 0 24px 60px -20px rgba(26,26,26,0.22);
+  --shadow-illus: 0 2px 6px rgba(47,47,47,0.08), 0 8px 12px rgba(47,47,47,0.11);
 
   --container: 1200px;
 }

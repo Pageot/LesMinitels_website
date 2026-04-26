@@ -7,6 +7,21 @@
   <meta name="description" content="Les Minitels — créateur d'apps depuis 2026. Des apps pensées pour faciliter le quotidien." />
   <link rel="icon" href="assets/img/logo.svg" type="image/svg+xml" />
 
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Les Minitels" />
+  <meta property="og:title" content="Les Minitels — Facilitateur de vie" />
+  <meta property="og:description" content="Créateur d'apps depuis 2026. Des apps pensées pour faciliter le quotidien." />
+  <meta property="og:url" content="https://lesminitels.fr/" />
+  <meta property="og:image" content="https://lesminitels.fr/assets/img/LesMinitels_SocialsShare.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Les Minitels — Facilitateur de vie" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Les Minitels — Facilitateur de vie" />
+  <meta name="twitter:description" content="Créateur d'apps depuis 2026. Des apps pensées pour faciliter le quotidien." />
+  <meta name="twitter:image" content="https://lesminitels.fr/assets/img/LesMinitels_SocialsShare.jpg" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Changa+One:ital@0;1&display=swap" rel="stylesheet" />
@@ -58,7 +73,7 @@
       getShaderNoiseTexture,
     } from "https://esm.sh/@paper-design/shaders@0.0.76";
     import { initCarousel } from "./assets/js/carousel.js";
-    import { CAROUSEL_ITEMS, PROJECTS } from "./assets/js/projects.js";
+    import { CAROUSEL_ITEMS, PROJECTS, PLACEHOLDER_SHOWREEL } from "./assets/js/projects.js";
 
     const bg = document.getElementById("bg-shader");
     const colors = ["#fff0fc75", "#ffd6b34f"];
@@ -96,10 +111,11 @@
     CAROUSEL_ITEMS.forEach((item) => {
       const proj = PROJECTS[item.project];
       const linked = proj && proj.ready && !item.placeholder;
-      const hasImage = linked && proj.showreel && proj.showreel.length > 0;
+      const projectImage = linked && proj.showreel && proj.showreel.length > 0 ? proj.showreel[0] : null;
+      const imageSrc = projectImage || (item.placeholder ? PLACEHOLDER_SHOWREEL : null);
 
       const a = document.createElement("a");
-      a.className = "carousel-card" + (hasImage ? "" : " is-placeholder");
+      a.className = "carousel-card" + (imageSrc ? "" : " is-placeholder");
       a.setAttribute("role", "listitem");
       a.setAttribute("draggable", "false");
       if (proj) a.dataset.project = proj.id;
@@ -115,11 +131,13 @@
       const inner = document.createElement("div");
       inner.className = "carousel-card-inner";
 
-      if (hasImage) {
+      if (imageSrc) {
         const img = document.createElement("img");
-        img.src = proj.showreel[0];
-        img.alt = proj.name;
+        img.src = imageSrc;
+        img.alt = proj ? proj.name : item.label;
         img.setAttribute("draggable", "false");
+        img.loading = "lazy";
+        img.decoding = "async";
         inner.appendChild(img);
       } else {
         const label = document.createElement("div");

@@ -11,6 +11,30 @@ function resolve(obj, dotPath) {
   return dotPath.split('.').reduce((acc, key) => (acc == null ? undefined : acc[key]), obj);
 }
 
+function parseArgs(argsStr) {
+  const args = {};
+  for (const m of argsStr.matchAll(/(\w+)="([^"]*)"/g)) {
+    args[m[1]] = m[2];
+  }
+  return args;
+}
+
+// Expand {{> name }} or {{> name key="val" }} include directives until none remain.
+// Inside partials, {{ $key }} resolves to the matching local arg (defaults to "").
+function expandPartials(template, partialsDir) {
+  const partialRe = /\{\{>\s*([\w/-]+)((?:\s+\w+="[^"]*")*)\s*\}\}/g;
+  let prev;
+  do {
+    prev = template;
+    template = template.replace(partialRe, (_m, name, argsStr) => {
+      const body = fs.readFileSync(path.join(partialsDir, `${name}.html`), 'utf8');
+      const args = parseArgs(argsStr);
+      return body.replace(/(\s?)\{\{\s*\$(\w+)\s*\}\}/g, (_, ws, k) => args[k] ? ws + args[k] : '');
+    });
+  } while (template !== prev);
+  return template;
+}
+
 function render(template, strings, source) {
   return template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_match, key) => {
     const value = resolve(strings, key);
@@ -23,7 +47,9 @@ function render(template, strings, source) {
 
 function build(pageDir) {
   const pageRoot = path.join(ROOT, pageDir);
-  const template = fs.readFileSync(path.join(pageRoot, '_template.html'), 'utf8');
+  const partialsDir = path.join(pageRoot, 'partials');
+  const rawTemplate = fs.readFileSync(path.join(pageRoot, '_template.html'), 'utf8');
+  const template = fs.existsSync(partialsDir) ? expandPartials(rawTemplate, partialsDir) : rawTemplate;
 
   for (const locale of LOCALES) {
     const stringsPath = path.join(pageRoot, `_strings.${locale}.json`);
