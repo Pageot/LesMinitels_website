@@ -118,16 +118,10 @@
     },
     "local_ai": {
       "eyebrow": "IA locale",
-      "title": "L'IA qui vit sur votre <span class=\"marker warm\">ordinateur.</span>",
+      "title": "<span class=\"marker\">Aucune donnée</span> ne quitte votre ordinateur.",
       "body": "Par défaut, SpellFix utilise Apple Foundation Model, installé nativement sur votre ordinateur. Vous pouvez télécharger d'autres modèles (Qwen, Gemma, SmolLM, etc) selon vos besoins. Aucun modèle ne demande de connexion internet, une fois installé.",
       "mockup_title": "Modèles IA"
     }
-  },
-  "privacy": {
-    "title": "Aucune donnée ne quitte votre <span class=\"marker\">ordinateur.</span>",
-    "bullet1": "Aucune requête réseau pour la correction ou la traduction.",
-    "bullet2": "Aucun log, aucun tracker, aucune analytique sur votre texte.",
-    "bullet3": "Vérifiable avec n'importe quel pare-feu (Little Snitch, LuLu) : zéro requête sortante pendant l'usage."
   },
   "pricing": {
     "eyebrow": "Tarifs",
@@ -141,10 +135,10 @@
     "feat_models": "Modèles IA en local",
     "free_watermark": "Filigrane dans les sorties : « — Corrected by SpellFix »",
     "cta_download": "Télécharger",
-    "pro_ribbon": "À vie",
     "pro_name": "SpellFix Pro",
     "pro_price": "21<small>€</small>",
-    "pro_sub": "Achat unique · Pour toujours",
+    "pro_price_suffix": "/ À vie",
+    "pro_sub": "Achat unique",
     "pro_no_watermark": "Aucun filigrane",
     "footnote": "L'essai Pro commence automatiquement à l'installation. Pendant 7 jours, SpellFix est sans filigrane. Ensuite, il reste gratuit, le filigrane apparaît tant que vous n'avez pas acheté la version Pro."
   },
@@ -177,7 +171,6 @@
     "link_download": "Télécharger",
     "link_support": "Support",
     "link_privacy": "Confidentialité",
-    "link_terms": "Conditions",
     "col_studio": "Studio",
     "copyright": "© 2026 Les Minitels · Tous droits réservés"
   }

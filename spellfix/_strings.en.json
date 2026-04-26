@@ -118,16 +118,10 @@
     },
     "local_ai": {
       "eyebrow": "Local AI",
-      "title": "AI that lives on your <span class=\"marker warm\">computer.</span>",
+      "title": "<span class=\"marker\">No data</span> ever leaves your computer.",
       "body": "SpellFix uses Apple Foundation Model by default, native to your computer. You can download extra models (Qwen, Gemma, SmolLM, etc) as needed. No model requires an internet connection, once installed.",
       "mockup_title": "AI Models"
     }
-  },
-  "privacy": {
-    "title": "No data ever leaves your <span class=\"marker\">computer.</span>",
-    "bullet1": "Zero network calls for correction or translation.",
-    "bullet2": "No logs, no trackers, no analytics on your text.",
-    "bullet3": "Verifiable with any firewall tool (Little Snitch, LuLu): zero outbound traffic during use."
   },
   "pricing": {
     "eyebrow": "Pricing",
@@ -141,10 +135,10 @@
     "feat_models": "Local AI models",
     "free_watermark": "Watermark on output : \"— Corrected by SpellFix\"",
     "cta_download": "Download",
-    "pro_ribbon": "Lifetime",
     "pro_name": "SpellFix Pro",
     "pro_price": "$24",
-    "pro_sub": "One-time · Yours forever",
+    "pro_price_suffix": "/ Lifetime",
+    "pro_sub": "One-time payment",
     "pro_no_watermark": "No watermark",
     "footnote": "The Pro trial starts automatically at install. For 7 days, SpellFix produces output without a watermark. After that, the app remains free, the watermark appears unless you own the Pro version."
   },
@@ -177,7 +171,6 @@
     "link_download": "Download",
     "link_support": "Support",
     "link_privacy": "Privacy",
-    "link_terms": "Terms",
     "col_studio": "Studio",
     "copyright": "© 2026 Les Minitels · All rights reserved"
   }

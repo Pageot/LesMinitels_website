@@ -836,6 +836,7 @@ button {
   width: 100%;
   display: flex;
   justify-content: center;
+  gap: 24px;
   padding-bottom: 24px;
 }
 
@@ -918,22 +919,22 @@ button {
   margin: 32px 0;
 }
 
-.privacy-body h2 {
+.privacy-body :is(h2, h3) {
   font-family: "Nova Klasse", sans-serif;
-  font-size: clamp(1.5rem, 3vw, 1.875rem);
   font-weight: 700;
   color: #171717;
   text-transform: uppercase;
+  word-spacing: 0.15em;
+}
+
+.privacy-body h2 {
+  font-size: clamp(1.5rem, 3vw, 1.875rem);
   letter-spacing: 1px;
   margin: 40px 0 24px;
 }
 
 .privacy-body h3 {
-  font-family: "Nova Klasse", sans-serif;
   font-size: clamp(1.25rem, 2.5vw, 1.5rem);
-  font-weight: 700;
-  color: #171717;
-  text-transform: uppercase;
   letter-spacing: 0.5px;
   margin: 32px 0 16px;
 }
