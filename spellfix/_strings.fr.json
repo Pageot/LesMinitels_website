@@ -19,11 +19,11 @@
     "description": "Double-tap sur la touche Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur. Correction, reformulation et traduction pour macOS."
   },
   "social": {
-    "og_title": "SpellFix — Correction et traduction, en local sur votre Mac",
+    "og_title": "SpellFix, correction et traduction, en local sur votre ordinateur",
     "og_description": "Double-tap sur Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur.",
     "og_url": "https://lesminitels.fr/spellfix/",
     "og_image": "https://lesminitels.fr/spellfix/assets/images/SpellFix_SocialsShare.jpg",
-    "og_image_alt": "SpellFix — Correction et traduction en local pour macOS",
+    "og_image_alt": "SpellFix, correction et traduction en local pour macOS",
     "og_locale": "fr_FR"
   },
   "hero": {

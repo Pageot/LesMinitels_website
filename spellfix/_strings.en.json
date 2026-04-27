@@ -19,11 +19,11 @@
     "description": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer. Correction, reshaping and translation for macOS."
   },
   "social": {
-    "og_title": "SpellFix — On-device correction and translation for your Mac",
+    "og_title": "SpellFix, On-device correction and translation for your Mac",
     "og_description": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer.",
     "og_url": "https://lesminitels.fr/spellfix/en/",
     "og_image": "https://lesminitels.fr/spellfix/assets/images/SpellFix_SocialsShare.jpg",
-    "og_image_alt": "SpellFix — On-device correction and translation for macOS",
+    "og_image_alt": "SpellFix, On-device correction and translation",
     "og_locale": "en_US"
   },
   "hero": {
@@ -88,7 +88,7 @@
       "demo_tone1_label": "Professional",
       "demo_tone1_output": "Dear team, I would like to propose that we arrange a meeting next week to review the budget.",
       "demo_tone2_label": "Concise",
-      "demo_tone2_output": "Team — let's schedule a meeting next week to discuss the budget.",
+      "demo_tone2_output": "Team, let's schedule a meeting next week to discuss the budget.",
       "demo_tone3_label": "Friendly",
       "demo_tone3_output": "Hey team! Let's set up a meeting next week to chat about the budget.",
       "demo_tone4_label": "Molière",
