@@ -48,7 +48,7 @@
         <button class="{{ nav.fr_active }}" data-lang-switch="fr" data-href="{{ paths.fr_home }}">FR</button>
         <button class="{{ nav.en_active }}" data-lang-switch="en" data-href="{{ paths.en_home }}">EN</button>
       </div>
-      <a class="btn btn-primary" href="#app-store"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18">{{ nav.download }}</a>
+      <a class="btn btn-primary" href="#app-store" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
     </div>
   </div>
 </header>
@@ -465,7 +465,7 @@
       <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="52">
     </a>
   </div>
-  <div class="bigmark" aria-hidden="true" style="letter-spacing: -12px; background-position: right center;">SpellFix</div>
+  <div class="bigmark" aria-hidden="true" style="background-position: right center;">SpellFix</div>
 </section>
 
 <!-- Footer -->
