@@ -6,7 +6,8 @@
     "home": "./",
     "site_home": "../../",
     "fr_home": "../",
-    "en_home": "./"
+    "en_home": "./",
+    "other_home": "../"
   },
   "nav": {
     "lang_label": "Language",

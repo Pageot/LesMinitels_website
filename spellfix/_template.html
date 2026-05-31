@@ -6,8 +6,21 @@
 <title>{{ head.title }}</title>
 <meta name="description" content="{{ head.description }}">
 <link rel="icon" href="{{ paths.assets }}/images/spellfix-icon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="fr" href="{{ paths.fr_home }}">
-<link rel="alternate" hreflang="en" href="{{ paths.en_home }}">
+<link rel="canonical" href="{{ social.og_url }}">
+<link rel="alternate" hreflang="fr" href="https://lesminitels.fr/spellfix/">
+<link rel="alternate" hreflang="en" href="https://lesminitels.fr/spellfix/en/">
+<link rel="alternate" hreflang="x-default" href="https://lesminitels.fr/spellfix/">
+<script>
+(function () {
+  try {
+    var cur = '{{ lang }}';
+    var stored = localStorage.getItem('spellfix_lang');
+    var want = (stored === 'fr' || stored === 'en') ? stored
+      : ((navigator.language || '').toLowerCase().indexOf('fr') === 0 ? 'fr' : 'en');
+    if (want !== cur) location.replace('{{ paths.other_home }}');
+  } catch (e) {}
+})();
+</script>
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Les Minitels">

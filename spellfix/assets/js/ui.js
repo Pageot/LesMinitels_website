@@ -3,7 +3,6 @@
 
   const LANG_KEY = 'spellfix_lang';
   const currentLang = document.documentElement.lang === 'en' ? 'en' : 'fr';
-  const otherLang = currentLang === 'fr' ? 'en' : 'fr';
 
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const press = (el) => {
@@ -13,24 +12,8 @@
   };
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // i18n redirect: honor stored preference, else sniff browser on first visit.
-  (function redirectIfNeeded() {
-    try {
-      const alt = document.querySelector('link[rel="alternate"][hreflang="' + otherLang + '"]');
-      if (!alt) return;
-      const altHref = alt.getAttribute('href');
-      if (!altHref) return;
-      const stored = localStorage.getItem(LANG_KEY);
-      if (stored) {
-        if (stored !== currentLang) window.location.replace(altHref);
-        return;
-      }
-      const nav = (navigator.language || '').toLowerCase();
-      const browserFr = nav.startsWith('fr');
-      if (currentLang === 'fr' && !browserFr) window.location.replace(altHref);
-      else if (currentLang === 'en' && browserFr) window.location.replace(altHref);
-    } catch (e) {}
-  })();
+  // i18n redirect runs as a blocking inline <head> script (see _template.html)
+  // so the wrong-language page never paints before location.replace() fires.
 
   const header = document.querySelector('.site-header');
   const onScroll = () => {
@@ -93,9 +76,11 @@
 
   document.querySelectorAll('[data-lang-switch]').forEach(btn => {
     btn.addEventListener('click', () => {
-      try { localStorage.setItem(LANG_KEY, btn.dataset.langSwitch); } catch (e) {}
+      const lang = btn.dataset.langSwitch;
+      try { localStorage.setItem(LANG_KEY, lang); } catch (e) {}
+      if (lang === currentLang) return;          // already on this language → no reload
       const to = btn.dataset.href;
-      if (to && to !== window.location.pathname) window.location.href = to;
+      if (to) window.location.href = to;
     });
   });
 
@@ -122,6 +107,9 @@
     document.addEventListener('visibilitychange', maybeWake);
     const awake = () =>
       isAwake() ? Promise.resolve() : new Promise(r => { pendingWake = r; });
+    // Park before each timed phase so a hidden tab / off-screen mock freezes the
+    // cycle at the next boundary instead of running its full ~7s in the background.
+    const idle = async (ms) => { await awake(); await wait(ms); };
 
     const cursor = mail.querySelector('[data-mail-cursor]');
     const textBox = mail.querySelector('[data-mail-text]');
@@ -216,9 +204,8 @@
 
     (async function loop() {
       while (true) {
-        await awake();
         // idle: typos visible with red wavy, pill at rest
-        await wait(2000);
+        await idle(2000);
 
         // selecting: cursor fades in at text start, drags to end while the
         // blue selection fills line by line behind it
@@ -230,31 +217,31 @@
           void cursor.offsetHeight;
           cursor.style.transition = '';
           mail.classList.add('has-cursor');
-          await wait(200); // cursor fade-in
+          await idle(200); // cursor fade-in
           mail.classList.add('is-selecting');
           cursor.style.setProperty('--cx', path.end.x + 'px');
           cursor.style.setProperty('--cy', path.end.y + 'px');
-          await wait(1200); // drag + selection fill
+          await idle(1200); // drag + selection fill
           mail.classList.add('has-selection');
         }
 
         // pressing: double-tap on ⌥ (cursor + selection stay visible)
-        press(keycap); await wait(340);
-        press(keycap); await wait(460);
+        press(keycap); await idle(340);
+        press(keycap); await idle(460);
 
         // fixed: swap bad → fix, fade selection out
         mail.classList.add('is-fading-selection');
         mail.classList.remove('is-selecting');
         mail.classList.add('is-fixed');
-        await wait(3000);
+        await idle(3000);
 
         // reset: cursor fades out, then revert to typo state
         mail.classList.remove('has-cursor');
-        await wait(200);
+        await idle(200);
         mail.classList.remove('is-fixed');
         mail.classList.remove('has-selection');
         mail.classList.remove('is-fading-selection');
-        await wait(400);
+        await idle(400);
       }
     })();
   }
