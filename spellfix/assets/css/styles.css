@@ -273,11 +273,17 @@ section { position: relative; }
   to { opacity: 1; transform: translateY(0); }
 }
 
-/* Figma-anchored scale factor on .hero-visual.
-   Reference: Figma frame is 510×536. All Figma px values stay correct at this
-   container width; --scale scales them on wider/narrower viewports. */
+/* Figma-anchored unit length on .hero-visual.
+   Reference: Figma frame is 510×536. --scale is the rendered size of one Figma px
+   at the current container width (1px at the 510px reference, clamped to 0.62–1.3px);
+   every size below is written as calc(<figma-px> * var(--scale)).
+   --scale is a LENGTH, not a unitless factor, on purpose: Firefox/Gecko does not
+   support dividing a <length> by a <length> in calc(), so the natural
+   `100cqw / 510px` silently invalidates the whole declaration there (keycap/pill
+   collapse to their initial sizes). `100cqw / 510` is length÷number — supported
+   everywhere — and yields the identical result. */
 .hero-visual { container-type: inline-size; container-name: hero-visual; }
-.hero-visual { --scale: clamp(0.62, 100cqw / 510px, 1.3); }
+.hero-visual { --scale: clamp(0.62px, 100cqw / 510, 1.3px); }
 
 /* Double-tap pill. Figma: top 49 / left 130 in 510×536; h 48, px 16, gap 17,
    bg rgba(245,241,232,0.7), border 2 #ece6d7, radius 8, backdrop-blur 2.
@@ -286,50 +292,50 @@ section { position: relative; }
   position: absolute;
   left: 25.5%; top: 12.5%;
   display: inline-flex; align-items: center;
-  gap: calc(17px * var(--scale));
-  height: calc(48px * var(--scale));
-  padding: 0 calc(16px * var(--scale));
+  gap: calc(17 * var(--scale));
+  height: calc(48 * var(--scale));
+  padding: 0 calc(16 * var(--scale));
   background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(2px);
   -webkit-backdrop-filter: blur(2px);
   border: 2px solid #ece6d7;
-  border-radius: calc(8px * var(--scale));
-  box-shadow: 0 calc(2px * var(--scale)) calc(8px * var(--scale)) rgba(26,26,26,0.08);
+  border-radius: calc(8 * var(--scale));
+  box-shadow: 0 calc(2 * var(--scale)) calc(8 * var(--scale)) rgba(26,26,26,0.08);
   z-index: 3;
   white-space: nowrap;
   overflow: visible;
 }
 .dt-pulse {
-  width: calc(8px * var(--scale)); height: calc(8px * var(--scale));
+  width: calc(8 * var(--scale)); height: calc(8 * var(--scale));
   border-radius: 50%;
   background: var(--accent-green);
-  box-shadow: 0 0 0 calc(3px * var(--scale)) color-mix(in srgb, var(--accent-green) 25%, transparent);
+  box-shadow: 0 0 0 calc(3 * var(--scale)) color-mix(in srgb, var(--accent-green) 25%, transparent);
   animation: pulse 2.4s infinite;
   flex-shrink: 0;
 }
 .dt-label {
   font-family: var(--font-body);
   font-weight: 500;
-  font-size: calc(20px * var(--scale));
+  font-size: calc(20 * var(--scale));
   color: #7a7468;
   line-height: 1;
 }
 .dt-keycap {
   display: inline-flex; align-items: center; justify-content: center;
-  width: calc(72px * var(--scale));
-  height: calc(72px * var(--scale));
-  border-radius: calc(14px * var(--scale));
+  width: calc(72 * var(--scale));
+  height: calc(72 * var(--scale));
+  border-radius: calc(14 * var(--scale));
   background: linear-gradient(180deg, #ffffff 0%, #f6f0e3 100%);
   border: 1px solid var(--border);
-  box-shadow: 0 calc(1px * var(--scale)) 0 rgba(26,26,26,0.14), inset 0 calc(-3px * var(--scale)) 0 rgba(0,0,0,0.05);
+  box-shadow: 0 calc(1 * var(--scale)) 0 rgba(26,26,26,0.14), inset 0 calc(-3 * var(--scale)) 0 rgba(0,0,0,0.05);
   font-family: var(--font-body);
-  font-size: calc(32px * var(--scale));
+  font-size: calc(32 * var(--scale));
   color: #000;
   font-weight: 500;
   transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
 }
 .dt-keycap.pressed {
-  transform: translateY(calc(2px * var(--scale))) scale(0.97);
+  transform: translateY(calc(2 * var(--scale))) scale(0.97);
   box-shadow: 0 0 0 rgba(0,0,0,0), inset 0 -1px 0 rgba(0,0,0,0.08);
   background: linear-gradient(180deg, #f0e9dc 0%, #e7e0d1 100%);
 }
@@ -343,10 +349,10 @@ section { position: relative; }
   background: #ffffff;
   border: 1px solid #c1c1c1;
   border-bottom: 0;
-  border-radius: calc(12px * var(--scale)) calc(12px * var(--scale)) 0 0;
+  border-radius: calc(12 * var(--scale)) calc(12 * var(--scale)) 0 0;
   overflow: hidden;
-  box-shadow: 0 calc(-2px * var(--scale)) calc(12px * var(--scale)) rgba(26,26,26,0.06);
-  font-size: calc(14px * var(--scale));
+  box-shadow: 0 calc(-2 * var(--scale)) calc(12 * var(--scale)) rgba(26,26,26,0.06);
+  font-size: calc(14 * var(--scale));
   line-height: 1.4;
   color: #2f2f2f;
   z-index: 2;
@@ -547,7 +553,7 @@ section { position: relative; }
   position: absolute;
   left: 0;
   top: 0;
-  width: calc(22px * var(--scale));
+  width: calc(22 * var(--scale));
   height: auto;
   opacity: 0;
   pointer-events: none;
@@ -555,7 +561,7 @@ section { position: relative; }
   transition: opacity 200ms ease, transform 1100ms cubic-bezier(0.25, 0.1, 0.25, 1);
   z-index: 4;
   will-change: transform, opacity;
-  filter: drop-shadow(0 calc(1px * var(--scale)) calc(2px * var(--scale)) rgba(0,0,0,0.2));
+  filter: drop-shadow(0 calc(1 * var(--scale)) calc(2 * var(--scale)) rgba(0,0,0,0.2));
 }
 .mail-mock.has-cursor .mail-cursor {
   opacity: 1;
@@ -619,7 +625,7 @@ section { position: relative; }
   box-shadow: var(--shadow-illus);
   container-type: inline-size;
   container-name: how-illus;
-  --scale: clamp(0.65, 100cqw / 340px, 1);
+  --scale: clamp(0.65px, 100cqw / 340, 1px);   /* length unit — see .hero-visual note (no length÷length, Firefox) */
 }
 .how-step__illus::after {
   content: "";
@@ -668,7 +674,7 @@ section { position: relative; }
   position: absolute;
   top: 32%;
   left: 50%;
-  --scale: 1;
+  --scale: 1px;   /* length unit — keep consistent with var(--scale) usages */
   transform: translate(-50%, -50%);
   width: clamp(64px, 25cqw, 92px);
   height: clamp(64px, 25cqw, 92px);
@@ -676,7 +682,7 @@ section { position: relative; }
   z-index: 3;
 }
 .how-step__keycap.pressed {
-  transform: translate(-50%, -50%) translateY(calc(2px * var(--scale))) scale(0.97);
+  transform: translate(-50%, -50%) translateY(calc(2 * var(--scale))) scale(0.97);
 }
 .how-step__badge {
   position: absolute;
@@ -707,7 +713,7 @@ section { position: relative; }
   top: 8.4%;
   bottom: 0;                  /* white fill extends to the illus bottom, body card covers it */
   border-radius: 12px 12px 0 0;
-  box-shadow: 0 calc(-2px * var(--scale)) calc(12px * var(--scale)) rgba(26,26,26,0.06);
+  box-shadow: 0 calc(-2 * var(--scale)) calc(12 * var(--scale)) rgba(26,26,26,0.06);
 }
 .how-step__illus .mail-mock.mini .mail-text { transition: opacity 0.5s ease; }
 .how-step__illus .mail-mock.mini.is-clearing .mail-text { opacity: 0; }
