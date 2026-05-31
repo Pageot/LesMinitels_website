@@ -18,7 +18,8 @@ export const PROJECTS = {
       `${ASSETS}/Convert_Showreel-6.jpg`,
     ],
     mockup: "/assets/img/phone-mockup.svg",
-    appStore: "#",
+    // No country code → the App Store redirects each visitor to their local storefront.
+    appStore: "https://apps.apple.com/app/id6759834840",
     googlePlay: "#",
     description: [
       "Convert is an all-in-one converter that works completely offline.",
