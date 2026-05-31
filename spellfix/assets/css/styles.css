@@ -1070,6 +1070,7 @@ section { position: relative; }
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.55);
   backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 .card.pro::before {
   content: "";

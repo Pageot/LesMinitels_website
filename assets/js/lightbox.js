@@ -40,11 +40,12 @@ export function initLightbox(galleryRoot) {
   const items = Array.from(galleryRoot.querySelectorAll(".gallery-item"));
   if (!items.length) return;
 
-  const images = items.map((el) => el.dataset.full || el.querySelector("img").src);
+  const images = items.map((el) => el.dataset.full || el.querySelector("img")?.src || "");
 
   let modal = null;
   let stageImg = null;
   let currentIndex = 0;
+  let lastFocused = null;
 
   const build = () => {
     modal = document.createElement("div");
@@ -109,12 +110,14 @@ export function initLightbox(galleryRoot) {
   };
 
   const open = (idx) => {
+    lastFocused = document.activeElement;
     if (!modal) build();
     currentIndex = idx;
     render();
     modal.classList.add("is-open");
     document.body.style.overflow = "hidden";
     document.addEventListener("keydown", onKey);
+    modal.querySelector(".lightbox-close")?.focus();
   };
 
   const close = () => {
@@ -122,12 +125,24 @@ export function initLightbox(galleryRoot) {
     modal.classList.remove("is-open");
     document.body.style.overflow = "";
     document.removeEventListener("keydown", onKey);
+    if (lastFocused && typeof lastFocused.focus === "function") lastFocused.focus();
   };
 
   const onKey = (e) => {
     if (e.key === "Escape") close();
     else if (e.key === "ArrowLeft") go(-1);
     else if (e.key === "ArrowRight") go(1);
+    else if (e.key === "Tab") {
+      // Trap focus within the modal's buttons (Close, Prev, Next)
+      const f = modal.querySelectorAll("button");
+      if (!f.length) return;
+      const first = f[0];
+      const last = f[f.length - 1];
+      const active = document.activeElement;
+      if (e.shiftKey && active === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && active === last) { e.preventDefault(); first.focus(); }
+      else if (!modal.contains(active)) { e.preventDefault(); first.focus(); }
+    }
   };
 
   items.forEach((el, idx) => {
