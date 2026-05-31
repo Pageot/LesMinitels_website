@@ -1,4 +1,4 @@
-import { enableDragToScroll } from "./utils.js";
+import { enableDragToScroll, onResizeRAF } from "./utils.js";
 
 export function initCarousel(root) {
   if (!root) return;
@@ -71,13 +71,9 @@ export function initCarousel(root) {
   };
   scroller.addEventListener("scroll", onHScroll, { passive: true });
 
-  let resizeRaf;
-  window.addEventListener("resize", () => {
-    if (resizeRaf) cancelAnimationFrame(resizeRaf);
-    resizeRaf = requestAnimationFrame(() => {
-      measure();
-      update3DEffect();
-    });
+  onResizeRAF(() => {
+    measure();
+    update3DEffect();
   });
 
   measure();

@@ -1,24 +1,4 @@
-import { enableDragToScroll } from "./utils.js";
-
-const SVG_NS = "http://www.w3.org/2000/svg";
-
-export function makeChevron(direction, size = 24) {
-  const svg = document.createElementNS(SVG_NS, "svg");
-  const s = String(size);
-  svg.setAttribute("width", s);
-  svg.setAttribute("height", s);
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "3");
-  svg.setAttribute("stroke-linecap", "round");
-  svg.setAttribute("stroke-linejoin", "round");
-  svg.setAttribute("aria-hidden", "true");
-  const line = document.createElementNS(SVG_NS, "polyline");
-  line.setAttribute("points", direction === "prev" ? "15 18 9 12 15 6" : "9 18 15 12 9 6");
-  svg.appendChild(line);
-  return svg;
-}
+import { enableDragToScroll, makeChevron, makeIconButton, onResizeRAF } from "./utils.js";
 
 export function initGallery(galleryRoot) {
   if (!galleryRoot) return;
@@ -48,11 +28,7 @@ export function initGallery(galleryRoot) {
   });
 
   const makeArrow = (dir, label) => {
-    const btn = document.createElement("button");
-    btn.type = "button";
-    btn.className = `gallery-arrow gallery-arrow-${dir}`;
-    btn.setAttribute("aria-label", label);
-    btn.appendChild(makeChevron(dir));
+    const btn = makeIconButton(`gallery-arrow gallery-arrow-${dir}`, label, makeChevron(dir));
     galleryRoot.appendChild(btn);
     return btn;
   };
@@ -61,8 +37,7 @@ export function initGallery(galleryRoot) {
   const next = makeArrow("next", "Image suivante");
 
   const step = () => {
-    const first = items[0];
-    return first ? first.offsetWidth + 13.156 : 180;
+    return items.length > 1 ? items[1].offsetLeft - items[0].offsetLeft : items[0].offsetWidth;
   };
   prev.addEventListener("click", () => scroller.scrollBy({ left: -step(), behavior: "smooth" }));
   next.addEventListener("click", () => scroller.scrollBy({ left: step(), behavior: "smooth" }));
@@ -74,9 +49,5 @@ export function initGallery(galleryRoot) {
   };
   updateArrowState();
   scroller.addEventListener("scroll", updateArrowState, { passive: true });
-  let resizeRaf;
-  window.addEventListener("resize", () => {
-    if (resizeRaf) cancelAnimationFrame(resizeRaf);
-    resizeRaf = requestAnimationFrame(updateArrowState);
-  });
+  onResizeRAF(updateArrowState);
 }

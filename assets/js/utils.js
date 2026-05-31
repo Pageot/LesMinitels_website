@@ -60,3 +60,68 @@ export function enableDragToScroll(scroller) {
     clearDragging: () => { dragged = false; },
   };
 }
+
+// Debounce a resize handler to a single rAF, cancelling the pending frame on
+// each event. Shared by the carousel and the gallery.
+export function onResizeRAF(cb) {
+  let raf;
+  window.addEventListener("resize", () => {
+    if (raf) cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(cb);
+  });
+}
+
+// Shared SVG icon + icon-button factories, used by the gallery arrows and the
+// lightbox controls.
+const SVG_NS = "http://www.w3.org/2000/svg";
+
+export function makeChevron(direction, size = 24) {
+  const svg = document.createElementNS(SVG_NS, "svg");
+  const s = String(size);
+  svg.setAttribute("width", s);
+  svg.setAttribute("height", s);
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "3");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+  svg.setAttribute("aria-hidden", "true");
+  const line = document.createElementNS(SVG_NS, "polyline");
+  line.setAttribute("points", direction === "prev" ? "15 18 9 12 15 6" : "9 18 15 12 9 6");
+  svg.appendChild(line);
+  return svg;
+}
+
+export function makeCloseIcon(size = 28) {
+  const svg = document.createElementNS(SVG_NS, "svg");
+  const s = String(size);
+  svg.setAttribute("width", s);
+  svg.setAttribute("height", s);
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "2");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+  svg.setAttribute("aria-hidden", "true");
+  for (const [x1, y1, x2, y2] of [[18, 6, 6, 18], [6, 6, 18, 18]]) {
+    const line = document.createElementNS(SVG_NS, "line");
+    line.setAttribute("x1", x1);
+    line.setAttribute("y1", y1);
+    line.setAttribute("x2", x2);
+    line.setAttribute("y2", y2);
+    svg.appendChild(line);
+  }
+  return svg;
+}
+
+// Generic icon button (replaces the duplicated makeNavButton / makeArrow cores).
+export function makeIconButton(className, label, svg) {
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = className;
+  btn.setAttribute("aria-label", label);
+  btn.appendChild(svg);
+  return btn;
+}

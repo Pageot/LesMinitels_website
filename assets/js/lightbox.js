@@ -1,38 +1,4 @@
-import { makeChevron } from "./gallery.js";
-
-const SVG_NS = "http://www.w3.org/2000/svg";
-
-function makeCloseIcon(size = 28) {
-  const svg = document.createElementNS(SVG_NS, "svg");
-  const s = String(size);
-  svg.setAttribute("width", s);
-  svg.setAttribute("height", s);
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "2");
-  svg.setAttribute("stroke-linecap", "round");
-  svg.setAttribute("stroke-linejoin", "round");
-  svg.setAttribute("aria-hidden", "true");
-  for (const [x1, y1, x2, y2] of [[18, 6, 6, 18], [6, 6, 18, 18]]) {
-    const line = document.createElementNS(SVG_NS, "line");
-    line.setAttribute("x1", x1);
-    line.setAttribute("y1", y1);
-    line.setAttribute("x2", x2);
-    line.setAttribute("y2", y2);
-    svg.appendChild(line);
-  }
-  return svg;
-}
-
-function makeNavButton(cls, label, svg) {
-  const btn = document.createElement("button");
-  btn.type = "button";
-  btn.className = cls;
-  btn.setAttribute("aria-label", label);
-  btn.appendChild(svg);
-  return btn;
-}
+import { makeChevron, makeCloseIcon, makeIconButton } from "./utils.js";
 
 export function initLightbox(galleryRoot) {
   if (!galleryRoot) return;
@@ -54,13 +20,13 @@ export function initLightbox(galleryRoot) {
     modal.setAttribute("aria-modal", "true");
     modal.setAttribute("aria-label", "Image viewer");
 
-    const closeBtn = makeNavButton("lightbox-close", "Close", makeCloseIcon(28));
+    const closeBtn = makeIconButton("lightbox-close", "Close", makeCloseIcon(28));
     closeBtn.addEventListener("click", close);
 
-    const prevBtn = makeNavButton("lightbox-nav prev", "Previous", makeChevron("prev", 28));
+    const prevBtn = makeIconButton("lightbox-nav prev", "Previous", makeChevron("prev", 28));
     prevBtn.addEventListener("click", (e) => { e.stopPropagation(); go(-1); });
 
-    const nextBtn = makeNavButton("lightbox-nav next", "Next", makeChevron("next", 28));
+    const nextBtn = makeIconButton("lightbox-nav next", "Next", makeChevron("next", 28));
     nextBtn.addEventListener("click", (e) => { e.stopPropagation(); go(1); });
 
     stageImg = document.createElement("img");
