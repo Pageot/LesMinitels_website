@@ -236,6 +236,7 @@ section { position: relative; }
 .appstore-badge { display: inline-block; transition: transform 0.15s; }
 .appstore-badge:hover { transform: translateY(-1px); }
 .appstore-badge img { display: block; height: 48px; width: auto; }
+.store-badges { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; justify-content: center; }
 .hero-meta {
   margin-top: 20px;
   font-size: 13px;

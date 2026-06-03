@@ -61,7 +61,7 @@
         <button class="{{ nav.fr_active }}" data-lang-switch="fr" data-href="{{ paths.fr_home }}">FR</button>
         <button class="{{ nav.en_active }}" data-lang-switch="en" data-href="{{ paths.en_home }}">EN</button>
       </div>
-      <a class="btn btn-primary" href="#app-store" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
+      <a class="btn btn-primary" href="#download" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
     </div>
   </div>
 </header>
@@ -76,9 +76,14 @@
       <p class="hero-sub">
         {{ hero.sub }}
       </p>
-      <div class="hero-cta">
-        <a href="#app-store" class="appstore-badge" aria-label="{{ hero.badge_aria }}">
+      <div class="hero-cta" id="download">
+        <!-- TODO: remplacer href="#" par l'URL Mac App Store une fois l'app publiée -->
+        <a href="#" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
           <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="48">
+        </a>
+        <!-- TODO: remplacer href="#" par l'URL Microsoft Store une fois l'app publiée -->
+        <a href="#" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
+          <img src="{{ paths.assets }}/images/microsoft-store-badge.svg" alt="{{ hero.ms_badge_alt }}" height="48">
         </a>
       </div>
       <div class="hero-meta">
@@ -404,7 +409,7 @@
           <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_models }}</li>
           <li class="muted"><img src="{{ paths.assets }}/images/minus-badge.svg" alt="" class="dash" width="20" height="20"> {{ pricing.free_watermark }}</li>
         </ul>
-        <a href="#app-store" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
+        <a href="#download" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
       </div>
       <div class="card pro">
         <h3>{{ pricing.pro_name }} <img src="{{ paths.assets }}/images/premium-badge.svg" alt="" class="pro-icon" width="22" height="22"></h3>
@@ -417,7 +422,7 @@
           <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.feat_models }}</li>
           <li><img src="{{ paths.assets }}/images/check-badge.svg" alt="" class="check" width="20" height="20"> {{ pricing.pro_no_watermark }}</li>
         </ul>
-        <a href="#app-store" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
+        <a href="#download" class="btn btn-ghost"><img src="{{ paths.assets }}/images/download-icon-dark.svg" alt="" class="btn-icon" width="18" height="18">{{ pricing.cta_download }}</a>
       </div>
     </div>
     <p class="pricing-sub">
@@ -474,9 +479,16 @@
 <section class="closing reveal">
   <div class="container">
     <h2 class="display h2">{{ closing.title }}</h2>
-    <a href="#app-store" class="appstore-badge" style="margin-top:10px; display:inline-block" aria-label="{{ hero.badge_aria }}">
-      <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="52">
-    </a>
+    <div class="store-badges" style="margin-top:10px;">
+      <!-- TODO: remplacer href="#" par l'URL Mac App Store une fois l'app publiée -->
+      <a href="#" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
+        <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="48">
+      </a>
+      <!-- TODO: remplacer href="#" par l'URL Microsoft Store une fois l'app publiée -->
+      <a href="#" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
+        <img src="{{ paths.assets }}/images/microsoft-store-badge.svg" alt="{{ hero.ms_badge_alt }}" height="48">
+      </a>
+    </div>
   </div>
   <div class="bigmark" aria-hidden="true" style="background-position: right center;">SpellFix</div>
 </section>
@@ -493,7 +505,7 @@
     <div class="footer-col">
       <h4>{{ footer.col_product }}</h4>
       <ul>
-        <li><a href="#app-store">{{ footer.link_download }}</a></li>
+        <li><a href="#download">{{ footer.link_download }}</a></li>
         <li><a href="{{ paths.fr_home }}support/">{{ footer.link_support }}</a></li>
         <li><a href="{{ paths.fr_home }}privacy/">{{ footer.link_privacy }}</a></li>
       </ul>

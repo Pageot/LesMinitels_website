@@ -32,7 +32,7 @@
         <button data-lang-switch="fr" data-href="/spellfix/">FR</button>
         <button class="active" data-lang-switch="en" data-href="/spellfix/en/">EN</button>
       </div>
-      <a class="btn btn-primary" href="/spellfix/#app-store"><img src="/spellfix/assets/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18">Download</a>
+      <a class="btn btn-primary" href="/spellfix/#download"><img src="/spellfix/assets/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18">Download</a>
     </div>
   </div>
 </header>
@@ -59,15 +59,15 @@
       <div class="faq">
         <details open>
           <summary>How do I install SpellFix?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Download SpellFix from the Mac App Store. After install, launch the app once, it will ask for accessibility permission, which is required so SpellFix can read your selection and replace it with the corrected text. No data leaves your computer; the permission is used only locally.</p>
+          <p>Download SpellFix from the Mac App Store (macOS) or the Microsoft Store (Windows). After install, launch the app once. On macOS it will ask for Accessibility permission, which is required so SpellFix can read your selection and replace it with the corrected text; on Windows, no special permission is required. Either way, your text never leaves your computer — permissions are used only locally.</p>
         </details>
         <details>
-          <summary>Which Macs are supported?<span class="chev" aria-hidden="true"></span></summary>
-          <p>SpellFix runs on Apple Silicon Macs (M1, M2, M3, M4, and later) with macOS 26 or later. Apple Foundation Model, the default AI engine requires Apple Silicon and is not available on Intel Macs.</p>
+          <summary>Which devices are supported?<span class="chev" aria-hidden="true"></span></summary>
+          <p><strong>macOS:</strong> Apple Silicon Macs (M1, M2, M3, M4, and later) with macOS 26 or later — Apple's Foundation Model, the default AI engine, requires Apple Silicon and is not available on Intel Macs. <strong>Windows:</strong> Windows 10 v1809 (build 17763) or later, x64 or ARM64.</p>
         </details>
         <details>
           <summary>Does SpellFix need an internet connection?<span class="chev" aria-hidden="true"></span></summary>
-          <p>No. Once installed, SpellFix runs entirely on-device. You only need internet for the initial download from the App Store and to download additional AI models if you choose to.</p>
+          <p>No. Once installed, SpellFix runs entirely on-device. You only need internet for the initial download from your platform's store (Mac App Store or Microsoft Store) and to download additional AI models if you choose to.</p>
         </details>
       </div>
     </div>
@@ -80,11 +80,11 @@
       <div class="faq">
         <details>
           <summary>Does SpellFix work in every app?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Yes. The double-tap ⌥ shortcut is global: Mail, Notes, Safari, Pages, Word, Slack, Figma, Notion, anywhere you can select text.</p>
+          <p>Yes. The double-tap shortcut is global: Mail, Notes, browser, Pages, Word, Slack, Figma, Notion, anywhere you can select text. On macOS, double-tap ⌥ (Option); on Windows, double-tap the right Alt key (AltGr on European keyboards).</p>
         </details>
         <details>
           <summary>Which AI models are used?<span class="chev" aria-hidden="true"></span></summary>
-          <p>By default, Apple Foundation Model, preinstalled on Apple Silicon Macs running macOS 26. From <strong>Settings → Models</strong> you can also download Qwen 3.5, Gemma 4, SmolLM3 or other supported local models. All models run on your computer; none of them require an internet connection after download.</p>
+          <p>On macOS, Apple's Foundation Model, preinstalled on Apple Silicon Macs running macOS 26. On Windows, a local model run by the bundled inference engine. From <strong>Settings → Models</strong> you can also download Qwen 3.5, Gemma 4, SmolLM3 or other supported local models. All models run on your computer; none of them require an internet connection after download.</p>
         </details>
         <details>
           <summary>How do I add or remove tones?<span class="chev" aria-hidden="true"></span></summary>
@@ -92,7 +92,7 @@
         </details>
         <details>
           <summary>How do I change the keyboard shortcut?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Open <strong>Settings → Shortcut</strong>. Pick any modifier or key combination, double-tap ⌥, ⌘+E, F19, anything you like. The new shortcut takes effect immediately.</p>
+          <p>Open <strong>Settings → Shortcut</strong>. Pick any modifier or key combination — on macOS, double-tap ⌥, ⌘+E, F19; on Windows, double-tap right Alt (AltGr), Ctrl+E, F19 — anything you like. The default trigger differs per platform, and the new shortcut takes effect immediately.</p>
         </details>
         <details>
           <summary>Is my text sent anywhere?<span class="chev" aria-hidden="true"></span></summary>
@@ -113,15 +113,15 @@
         </details>
         <details>
           <summary>Is it really a one-time purchase?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Yes. One payment and SpellFix Pro is yours forever, on every Mac signed in with the same Apple ID. No subscription, no renewal, no resale.</p>
+          <p>Yes. One payment and SpellFix Pro is yours forever, on every device signed in with the same store account — your Apple ID on macOS, your Microsoft account on Windows. No subscription, no renewal, no resale.</p>
         </details>
         <details>
-          <summary>I bought Pro but it isn't activated on this Mac.<span class="chev" aria-hidden="true"></span></summary>
-          <p>Open SpellFix and go to <strong>Settings → Account → Restore purchase</strong>. Make sure you are signed in to the App Store with the Apple ID used for the original purchase. If the issue persists, email us with your purchase receipt number.</p>
+          <summary>I bought Pro but it isn't activated on this device.<span class="chev" aria-hidden="true"></span></summary>
+          <p>Open SpellFix and go to <strong>Settings → Account → Restore purchase</strong>. Make sure you are signed in to the store with the account used for the original purchase — your Apple ID on macOS, your Microsoft account on Windows. If the issue persists, email us with your purchase receipt number.</p>
         </details>
         <details>
           <summary>What is the refund policy?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Apple's App Store rules apply. You can request a refund directly from Apple within 14 days at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer">reportaproblem.apple.com</a>. We don't process payments ourselves, so refunds must go through Apple.</p>
+          <p>On macOS, Apple's App Store rules apply — request a refund directly from Apple within 14 days at <a href="https://reportaproblem.apple.com" target="_blank" rel="noopener noreferrer">reportaproblem.apple.com</a>. On Windows, refunds are handled by the Microsoft Store. We don't process payments ourselves, so refunds go through the platform store.</p>
         </details>
       </div>
     </div>
@@ -134,7 +134,7 @@
       <div class="faq">
         <details>
           <summary>The double-tap shortcut doesn't trigger.<span class="chev" aria-hidden="true"></span></summary>
-          <p>Most common cause: SpellFix doesn't have accessibility permission. Open <strong>System Settings → Privacy &amp; Security → Accessibility</strong> and make sure SpellFix is listed and enabled. If it still doesn't work, try changing the shortcut in <strong>SpellFix Settings → Shortcut</strong>, then changing it back.</p>
+          <p>On macOS, the most common cause is a missing Accessibility permission: open <strong>System Settings → Privacy &amp; Security → Accessibility</strong> and make sure SpellFix is listed and enabled. On Windows, no permission is needed — if the shortcut doesn't fire, check that another app isn't intercepting the right Alt (AltGr) key. On either platform, try changing the shortcut in <strong>SpellFix Settings → Shortcut</strong>, then changing it back.</p>
         </details>
         <details>
           <summary>Correction is slow or unresponsive.<span class="chev" aria-hidden="true"></span></summary>
@@ -146,7 +146,7 @@
         </details>
         <details>
           <summary>How do I report a bug?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Email <a href="mailto:lesminitels@protonmail.com">lesminitels@protonmail.com</a> with a description of the issue, the macOS version (<strong>Apple menu → About this Mac</strong>), the SpellFix version (<strong>SpellFix menu → About</strong>), and a screenshot if relevant.</p>
+          <p>Email <a href="mailto:lesminitels@protonmail.com">lesminitels@protonmail.com</a> with a description of the issue, your OS and version (macOS: <strong>Apple menu → About This Mac</strong>; Windows: <strong>Settings → System → About</strong>), the SpellFix version (<strong>Settings → About</strong>), and a screenshot if relevant. Please mention whether you're on macOS or Windows.</p>
         </details>
       </div>
     </div>
@@ -165,7 +165,7 @@
     <div class="footer-col">
       <h4>Product</h4>
       <ul>
-        <li><a href="/spellfix/#app-store">Download</a></li>
+        <li><a href="/spellfix/#download">Download</a></li>
         <li><a href="/spellfix/support/">Support</a></li>
         <li><a href="/spellfix/privacy/">Privacy</a></li>
       </ul>

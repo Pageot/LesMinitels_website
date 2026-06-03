@@ -17,23 +17,25 @@
   },
   "head": {
     "title": "SpellFix, Correction et traduction, en local sur votre ordinateur",
-    "description": "Double-tap sur la touche Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur. Correction, reformulation et traduction pour macOS."
+    "description": "Double-tap pour corriger votre texte en local : votre texte ne quitte jamais votre ordinateur. Correction, reformulation et traduction, sur Mac et Windows."
   },
   "social": {
     "og_title": "SpellFix, correction et traduction, en local sur votre ordinateur",
-    "og_description": "Double-tap sur Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur.",
+    "og_description": "Double-tap : votre texte est corrigé en local, et ne quitte jamais votre ordinateur.",
     "og_url": "https://lesminitels.fr/spellfix/",
     "og_image": "https://lesminitels.fr/spellfix/assets/images/SpellFix_SocialsShare.jpg",
-    "og_image_alt": "SpellFix, correction et traduction en local pour macOS",
+    "og_image_alt": "SpellFix, correction et traduction en local, sur Mac et Windows",
     "og_locale": "fr_FR"
   },
   "hero": {
     "title": "Corrigez n'importe quel <em>texte</em>, partout sur votre <span class=\"marker\">ordinateur.</span>",
-    "sub": "Double-tap sur la touche Option. Votre texte est corrigé, en local, sans qu'aucune donnée ne quitte votre ordinateur.",
+    "sub": "Double-tap, et votre texte est corrigé en local. Votre texte ne quitte jamais votre ordinateur.",
     "badge_aria": "Télécharger sur le Mac App Store",
     "badge_alt": "Download on the Mac App Store",
-    "meta_platform": "Pour Mac Apple Silicon",
-    "meta_os": "macOS 26 ou ultérieur",
+    "ms_badge_aria": "Télécharger sur le Microsoft Store",
+    "ms_badge_alt": "Get it from Microsoft",
+    "meta_platform": "Mac Apple Silicon (macOS 26+)",
+    "meta_os": "Windows 10/11 (x64 & ARM64)",
     "double_tap": "Double-tap",
     "mail": {
       "new_message": "Nouveau message",
@@ -57,7 +59,7 @@
     "step1_title": "Sélectionnez le texte.",
     "step1_body": "Dans un mail, un document, une note, n'importe quelle app.",
     "step2_title": "Double-tap sur ⌥.",
-    "step2_body": "Un raccourci universel, actif partout dans macOS.",
+    "step2_body": "Un raccourci universel, actif partout sur votre ordinateur. Sur Windows : double-appui sur Alt droite (AltGr).",
     "step3_title": "Votre texte est corrigé.",
     "step3_body": "La correction remplace l'original, et se trouve déjà dans votre presse-papier."
   },
@@ -65,7 +67,7 @@
     "correction": {
       "eyebrow": "Correction",
       "title": "Une correction nette, en un <span class=\"marker\">geste.</span>",
-      "body": "Grammaire, orthographe, conjugaison. SpellFix corrige votre texte et le copie automatiquement dans le presse-papier. Rien n'est envoyé sur internet.",
+      "body": "Grammaire, orthographe, conjugaison. SpellFix corrige votre texte et le copie automatiquement dans le presse-papier. Votre texte n'est jamais envoyé sur internet.",
       "demo_aria": "Aperçu de l'app SpellFix : correction orthographique",
       "demo_tab_fix": "Corriger",
       "demo_tab_translate": "Traduire",
@@ -119,8 +121,8 @@
     },
     "local_ai": {
       "eyebrow": "IA locale",
-      "title": "<span class=\"marker\">Aucune donnée</span> ne quitte votre ordinateur.",
-      "body": "Par défaut, SpellFix utilise Apple Foundation Model, installé nativement sur votre ordinateur. Vous pouvez télécharger d'autres modèles (Qwen, Gemma, SmolLM, etc) selon vos besoins. Aucun modèle ne demande de connexion internet, une fois installé.",
+      "title": "<span class=\"marker\">Votre texte</span> ne quitte jamais votre ordinateur.",
+      "body": "Sur Mac, SpellFix utilise par défaut le modèle Foundation d'Apple ; sur Windows, un moteur d'inférence intégré. Vous pouvez aussi télécharger d'autres modèles locaux (Qwen, Gemma, SmolLM, etc) selon vos besoins. Aucun modèle ne demande de connexion internet, une fois installé.",
       "mockup_title": "Modèles IA"
     }
   },
@@ -147,13 +149,13 @@
     "eyebrow": "Questions fréquentes",
     "title": "On vous répond <span class=\"marker\">sans filigrane.</span>",
     "q1": "SpellFix fonctionne-t-il sans connexion internet ?",
-    "a1": "Oui. Toute la correction et la traduction se font en local, sur votre ordinateur. Aucune donnée n'est envoyée sur internet.",
+    "a1": "Oui. Toute la correction et la traduction se font en local, sur votre ordinateur. Votre texte n'est jamais envoyé sur internet.",
     "q2": "Quels modèles d'IA sont utilisés ?",
-    "a2": "Par défaut, Apple Foundation Model, préinstallé sur les Mac Apple Silicon sous macOS 26 et ultérieur. Vous pouvez ajouter d'autres modèles locaux (Qwen 3.5, Gemma 4, SmolLM3) depuis les réglages.",
+    "a2": "Sur Mac : le modèle Foundation d'Apple, préinstallé sur les Mac Apple Silicon (macOS 26+). Sur Windows : un modèle local exécuté par le moteur d'inférence intégré. Sur les deux, vous pouvez ajouter d'autres modèles locaux (Qwen 3.5, Gemma 4, SmolLM3) depuis les réglages.",
     "q3": "Mon texte est-il envoyé quelque part ?",
     "a3": "Non. Aucune requête réseau n'est émise pendant la correction ou la traduction. Vous pouvez le vérifier avec Little Snitch ou n'importe quel outil équivalent.",
     "q4": "SpellFix marche dans toutes les applications ?",
-    "a4": "Oui. Le raccourci ⌥⌥ (personnalisable) est global : Mail, Notes, Safari, Word, Slack, Figma, n'importe où.",
+    "a4": "Oui. Le raccourci est global : Mail, Notes, navigateur, Word, Slack, Figma, n'importe où. Sur Mac, double-appui sur ⌥ (Option) ; sur Windows, double-appui sur Alt droite (AltGr sur les claviers européens). Personnalisable.",
     "q5": "Puis-je personnaliser les tons de reformulation ?",
     "a5": "Oui. Dans les réglages, vous pouvez ajouter, retirer ou modifier les tons. Les raccourcis correspondants restent fidèles à votre choix.",
     "q6": "Quelle est la différence entre la version gratuite et Pro ?",
@@ -161,7 +163,7 @@
     "q7": "Est-ce vraiment un achat unique ?",
     "a7": "Oui. 21 € une fois, et c'est à vous pour toujours. Aucun abonnement, aucune revente, aucun renouvellement.",
     "q8": "Quelle est la politique de remboursement ?",
-    "a8": "Elle suit les règles de l'App Store d'Apple. Vous pouvez demander un remboursement directement auprès d'Apple dans les 14 jours."
+    "a8": "Sur Mac, elle suit les règles de l'App Store d'Apple (remboursement auprès d'Apple sous 14 jours). Sur Windows, le remboursement passe par le Microsoft Store."
   },
   "closing": {
     "title": "Écrivez mieux. <em style=\"font-style:italic\">En silence.</em>"

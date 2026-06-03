@@ -17,11 +17,11 @@
   },
   "head": {
     "title": "SpellFix, On-device correction and translation for your computer",
-    "description": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer. Correction, reshaping and translation for macOS."
+    "description": "Double-tap to correct your text on-device — your text never leaves your computer. Correction, reshaping and translation, on Mac and Windows."
   },
   "social": {
-    "og_title": "SpellFix, On-device correction and translation for your Mac",
-    "og_description": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer.",
+    "og_title": "SpellFix, On-device correction and translation for your computer",
+    "og_description": "Double-tap and your text is corrected on-device. Your text never leaves your computer.",
     "og_url": "https://lesminitels.fr/spellfix/en/",
     "og_image": "https://lesminitels.fr/spellfix/assets/images/SpellFix_SocialsShare.jpg",
     "og_image_alt": "SpellFix, On-device correction and translation",
@@ -29,11 +29,13 @@
   },
   "hero": {
     "title": "Fix any <em>text</em>,<br>anywhere on your <span class=\"marker\">computer.</span>",
-    "sub": "Double-tap the Option key. Your text is corrected on-device, no data ever leaves your computer.",
+    "sub": "Double-tap and your text is corrected on-device. Your text never leaves your computer.",
     "badge_aria": "Download on the Mac App Store",
     "badge_alt": "Download on the Mac App Store",
-    "meta_platform": "For Apple Silicon Macs",
-    "meta_os": "macOS 26 or later",
+    "ms_badge_aria": "Download from the Microsoft Store",
+    "ms_badge_alt": "Get it from Microsoft",
+    "meta_platform": "Apple Silicon Macs (macOS 26+)",
+    "meta_os": "Windows 10/11 (x64 & ARM64)",
     "double_tap": "Double-tap",
     "mail": {
       "new_message": "New message",
@@ -57,7 +59,7 @@
     "step1_title": "Select the text.",
     "step1_body": "In an email, a document, a note, any app.",
     "step2_title": "Double-tap ⌥.",
-    "step2_body": "A universal shortcut, active everywhere in macOS.",
+    "step2_body": "A universal shortcut, active everywhere on your computer. On Windows: double-tap the right Alt key (AltGr).",
     "step3_title": "Your text is corrected.",
     "step3_body": "The correction replaces the original and is already on your clipboard."
   },
@@ -65,7 +67,7 @@
     "correction": {
       "eyebrow": "Correction",
       "title": "Clean corrections, in a single <span class=\"marker\">gesture.</span>",
-      "body": "Grammar, spelling, conjugation. SpellFix fixes your text and auto-copies it to the clipboard. Nothing is ever sent to the internet.",
+      "body": "Grammar, spelling, conjugation. SpellFix fixes your text and auto-copies it to the clipboard. Your text is never sent to the internet.",
       "demo_aria": "SpellFix app preview: spelling correction",
       "demo_tab_fix": "Fix grammar",
       "demo_tab_translate": "Translate",
@@ -119,8 +121,8 @@
     },
     "local_ai": {
       "eyebrow": "Local AI",
-      "title": "<span class=\"marker\">No data</span> ever leaves your computer.",
-      "body": "SpellFix uses Apple Foundation Model by default, native to your computer. You can download extra models (Qwen, Gemma, SmolLM, etc) as needed. No model requires an internet connection, once installed.",
+      "title": "<span class=\"marker\">Your text</span> never leaves your computer.",
+      "body": "On Mac, SpellFix uses Apple's Foundation Model by default; on Windows, a bundled inference engine. You can also download extra local models (Qwen, Gemma, SmolLM, etc) as needed. No model requires an internet connection, once installed.",
       "mockup_title": "AI Models"
     }
   },
@@ -147,13 +149,13 @@
     "eyebrow": "Frequently asked",
     "title": "Straight answers, <span class=\"marker\">no watermark.</span>",
     "q1": "Does SpellFix work offline?",
-    "a1": "Yes. Correction and translation run locally on your computer. No data is sent over the internet.",
+    "a1": "Yes. Correction and translation run locally on your computer. Your text is never sent over the internet.",
     "q2": "Which AI models are used?",
-    "a2": "By default, Apple Foundation Model, preinstalled on Apple Silicon Macs running macOS 26 and later. You can add other local models (Qwen 3.5, Gemma 4, SmolLM3) from the settings.",
+    "a2": "On Mac: Apple's Foundation Model, preinstalled on Apple Silicon Macs (macOS 26+). On Windows: a local model run by the bundled inference engine. On both, you can add other local models (Qwen 3.5, Gemma 4, SmolLM3) from the settings.",
     "q3": "Is my text sent anywhere?",
     "a3": "No. No network request is made during correction or translation. You can verify this with Little Snitch or any equivalent tool.",
     "q4": "Does SpellFix work in every app?",
-    "a4": "Yes. The ⌥⌥ shortcut (customizable) is global: Mail, Notes, Safari, Word, Slack, Figma, everywhere.",
+    "a4": "Yes. The shortcut is global: Mail, Notes, browser, Word, Slack, Figma, everywhere. On Mac, double-tap ⌥ (Option); on Windows, double-tap the right Alt key (AltGr on European keyboards). Customizable.",
     "q5": "Can I customize the tone buttons?",
     "a5": "Yes. In the settings, you can add, remove, or edit tones. Your layout is yours.",
     "q6": "What's the difference between Free and Pro?",
@@ -161,7 +163,7 @@
     "q7": "Is it really a one-time purchase?",
     "a7": "Yes. $24 once and it's yours forever. No subscription, no resale, no renewal.",
     "q8": "What is the refund policy?",
-    "a8": "Apple's App Store rules apply. You can request a refund from Apple directly within 14 days."
+    "a8": "On Mac, Apple's App Store rules apply (refund from Apple within 14 days). On Windows, refunds are handled by the Microsoft Store."
   },
   "closing": {
     "title": "Write better. <em style=\"font-style:italic\">Quietly.</em>"
