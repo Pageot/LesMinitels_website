@@ -21,6 +21,23 @@
   } catch (e) {}
 })();
 </script>
+<script>
+// OS detection: add os-mac to <html> only for a real macOS desktop (not iPadOS/touch),
+// before first paint, so the Mac shortcut variant shows with no flash. Default = Windows.
+(function () {
+  try {
+    var uad = navigator.userAgentData;
+    var isMac;
+    if (uad && typeof uad.platform === 'string') {
+      isMac = uad.platform === 'macOS';
+    } else {
+      var ua = navigator.userAgent || '';
+      isMac = /Mac/.test(ua) && (navigator.maxTouchPoints || 0) <= 1;
+    }
+    if (isMac) document.documentElement.classList.add('os-mac');
+  } catch (e) {}
+})();
+</script>
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Les Minitels">
@@ -75,6 +92,7 @@
       </h1>
       <p class="hero-sub">
         {{ hero.sub }}
+        <span class="hero-sub__alt"><span class="os-only-win">{{ hero.sub_alt_win }}</span><span class="os-only-mac">{{ hero.sub_alt_mac }}</span></span>
       </p>
       <div class="hero-cta" id="download">
         <!-- TODO: remplacer href="#" par l'URL Mac App Store une fois l'app publiée -->
@@ -97,10 +115,16 @@
     <div class="hero-visual reveal">
       <div class="paint-bg"></div>
 
-      <div class="dt-pill" aria-hidden="true">
+      <div class="dt-pill os-only-win" aria-hidden="true">
         <span class="dt-pulse"></span>
         <span class="dt-label">{{ hero.double_tap }}</span>
-        <span class="dt-keycap">⌥</span>
+        <span class="dt-keycap dt-keycap--text" data-dt-keycap>alt</span>
+      </div>
+
+      <div class="dt-pill os-only-mac" aria-hidden="true">
+        <span class="dt-pulse"></span>
+        <span class="dt-label">{{ hero.shortcut_label }}</span>
+        <span class="dt-keycap dt-keycap--combo" data-dt-keycap><span class="dt-key">⌃</span><span class="dt-key">⌥</span><span class="dt-key">⌘</span><span class="dt-key">C</span></span>
       </div>
 
       <div class="mail-mock" data-mail aria-hidden="true">
@@ -206,14 +230,20 @@
         </div>
       </article>
 
-      <article class="how-step reveal">
-        <div class="how-step__illus" aria-hidden="true">
-          <span class="dt-keycap how-step__keycap" data-how-keycap>⌥</span>
-        </div>
-        <div class="how-step__body">
-          <span class="how-step__num">2.</span>
-          <h3>{{ how.step2_title }}</h3>
-          <p>{{ how.step2_body }}</p>
+      <article class="how-step how-step--stage reveal">
+        <div class="how-step__illus" aria-hidden="true"></div>
+        <div class="how-step__overlay">
+          <div class="how-step__keyzone" aria-hidden="true">
+            <span class="dt-keycap how-step__keycap dt-keycap--text os-only-win" data-how-keycap>alt</span>
+            <span class="dt-keycap how-step__keycap dt-keycap--combo os-only-mac" data-how-keycap><span class="dt-key">⌃</span><span class="dt-key">⌥</span><span class="dt-key">⌘</span><span class="dt-key">C</span></span>
+          </div>
+          <div class="how-step__body">
+            <span class="how-step__num">2.</span>
+            <h3><span class="os-only-win">{{ how.step2_title_win }}</span><span class="os-only-mac">{{ how.step2_title_mac }}</span></h3>
+            <p><span class="os-only-win">{{ how.step2_body_win }}</span><span class="os-only-mac">{{ how.step2_body_mac }}</span>
+              <span class="how-step__alt"><span class="os-only-win">{{ how.step2_alt_win }}</span><span class="os-only-mac">{{ how.step2_alt_mac }}</span></span>
+            </p>
+          </div>
         </div>
       </article>
 
@@ -453,7 +483,7 @@
       </details>
       <details>
         <summary>{{ faq.q4 }}<span class="chev" aria-hidden="true"></span></summary>
-        <p>{{ faq.a4 }}</p>
+        <p>{{ faq.a4 }} <span class="os-only-win">{{ faq.a4_win }}</span><span class="os-only-mac">{{ faq.a4_mac }}</span> {{ faq.a4_tail }}</p>
       </details>
       <details>
         <summary>{{ faq.q5 }}<span class="chev" aria-hidden="true"></span></summary>

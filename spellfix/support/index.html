@@ -59,7 +59,7 @@
       <div class="faq">
         <details open>
           <summary>How do I install SpellFix?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Download SpellFix from the Mac App Store (macOS) or the Microsoft Store (Windows). After install, launch the app once. On macOS it will ask for Accessibility permission, which is required so SpellFix can read your selection and replace it with the corrected text; on Windows, no special permission is required. Either way, your text never leaves your computer — permissions are used only locally.</p>
+          <p>Download SpellFix from the Mac App Store (macOS) or the Microsoft Store (Windows). After install, launch the app once. On macOS, enable the SpellFix shortcut in <strong>System Settings → Keyboard → Keyboard Shortcuts → Services</strong> (⌃⌥⌘C by default), and grant Accessibility permission when asked so SpellFix can read your selection and replace it with the corrected text; on Windows, no special permission is required. Either way, your text never leaves your computer — permissions are used only locally.</p>
         </details>
         <details>
           <summary>Which devices are supported?<span class="chev" aria-hidden="true"></span></summary>
@@ -80,7 +80,7 @@
       <div class="faq">
         <details>
           <summary>Does SpellFix work in every app?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Yes. The double-tap shortcut is global: Mail, Notes, browser, Pages, Word, Slack, Figma, Notion, anywhere you can select text. On macOS, double-tap ⌥ (Option); on Windows, double-tap the right Alt key (AltGr on European keyboards).</p>
+          <p>Yes. The SpellFix shortcut is global: Mail, Notes, browser, Pages, Word, Slack, Figma, Notion, anywhere you can select text. On macOS, press ⌃⌥⌘C; on Windows, double-tap the right Alt key (AltGr on European keyboards).</p>
         </details>
         <details>
           <summary>Which AI models are used?<span class="chev" aria-hidden="true"></span></summary>
@@ -92,7 +92,7 @@
         </details>
         <details>
           <summary>How do I change the keyboard shortcut?<span class="chev" aria-hidden="true"></span></summary>
-          <p>Open <strong>Settings → Shortcut</strong>. Pick any modifier or key combination — on macOS, double-tap ⌥, ⌘+E, F19; on Windows, double-tap right Alt (AltGr), Ctrl+E, F19 — anything you like. The default trigger differs per platform, and the new shortcut takes effect immediately.</p>
+          <p>On macOS, open <strong>System Settings → Keyboard → Keyboard Shortcuts → Services → Text</strong> and double-click “Correct with SpellFix” to type new keys (⌃⌥⌘C by default). On Windows, open <strong>SpellFix Settings → Shortcut</strong> and pick any combination — double-tap right Alt (AltGr), Ctrl+E, F19, anything you like. The new shortcut takes effect immediately.</p>
         </details>
         <details>
           <summary>Is my text sent anywhere?<span class="chev" aria-hidden="true"></span></summary>
@@ -133,8 +133,8 @@
       </div>
       <div class="faq">
         <details>
-          <summary>The double-tap shortcut doesn't trigger.<span class="chev" aria-hidden="true"></span></summary>
-          <p>On macOS, the most common cause is a missing Accessibility permission: open <strong>System Settings → Privacy &amp; Security → Accessibility</strong> and make sure SpellFix is listed and enabled. On Windows, no permission is needed — if the shortcut doesn't fire, check that another app isn't intercepting the right Alt (AltGr) key. On either platform, try changing the shortcut in <strong>SpellFix Settings → Shortcut</strong>, then changing it back.</p>
+          <summary>The shortcut doesn't trigger.<span class="chev" aria-hidden="true"></span></summary>
+          <p>On macOS, first make sure the Service shortcut is enabled: open <strong>System Settings → Keyboard → Keyboard Shortcuts → Services → Text</strong> and check “Correct with SpellFix” (⌃⌥⌘C). Then confirm SpellFix has Accessibility permission in <strong>System Settings → Privacy &amp; Security → Accessibility</strong>. On Windows, no permission is needed — if the shortcut doesn't fire, check that another app isn't intercepting the right Alt (AltGr) key, or change the shortcut in <strong>SpellFix Settings → Shortcut</strong>.</p>
         </details>
         <details>
           <summary>Correction is slow or unresponsive.<span class="chev" aria-hidden="true"></span></summary>

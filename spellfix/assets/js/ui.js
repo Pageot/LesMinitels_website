@@ -3,6 +3,9 @@
 
   const LANG_KEY = 'spellfix_lang';
   const currentLang = document.documentElement.lang === 'en' ? 'en' : 'fr';
+  // Set by the blocking <head> script for a confirmed macOS desktop. Drives which
+  // keycap variant the animation targets and how many key presses it shows.
+  const isMac = document.documentElement.classList.contains('os-mac');
 
   const wait = (ms) => new Promise(r => setTimeout(r, ms));
   const press = (el) => {
@@ -39,7 +42,9 @@
 
   const howTrigger = document.querySelector('[data-how-anim]');
   if (howTrigger) {
-    const howKeycap = howTrigger.querySelector('[data-how-keycap]');
+    const howKeycap = isMac
+      ? howTrigger.querySelector('.os-only-mac[data-how-keycap]')
+      : howTrigger.querySelector('.os-only-win[data-how-keycap]');
     const howMail = howTrigger.querySelector('[data-how-mail]');
     const howBadge = howTrigger.querySelector('[data-how-badge]');
     const runHowOnce = async () => {
@@ -49,8 +54,12 @@
         return;
       }
       await wait(1000);
-      press(howKeycap); await wait(340);
-      press(howKeycap); await wait(660);
+      if (isMac) {
+        press(howKeycap); await wait(1000);            // single chord ⌃⌥⌘C
+      } else {
+        press(howKeycap); await wait(340);             // double-tap right Alt
+        press(howKeycap); await wait(660);
+      }
       howMail?.classList.add('is-clearing');
       await wait(500);
       howMail?.classList.add('is-fixed');
@@ -86,7 +95,9 @@
 
   const mail = document.querySelector('[data-mail]');
   if (mail && !reduceMotion) {
-    const keycap = document.querySelector('.dt-keycap');
+    const keycap = isMac
+      ? document.querySelector('.dt-pill.os-only-mac [data-dt-keycap]')
+      : document.querySelector('.dt-pill.os-only-win [data-dt-keycap]');
 
     // Pause when tab hidden or element off-screen
     let onScreen = true;
@@ -225,9 +236,13 @@
           mail.classList.add('has-selection');
         }
 
-        // pressing: double-tap on ⌥ (cursor + selection stay visible)
-        press(keycap); await idle(340);
-        press(keycap); await idle(460);
+        // pressing: single chord on Mac (⌃⌥⌘C), double-tap on Windows (right Alt)
+        if (isMac) {
+          press(keycap); await idle(800);
+        } else {
+          press(keycap); await idle(340);
+          press(keycap); await idle(460);
+        }
 
         // fixed: swap bad → fix, fade selection out
         mail.classList.add('is-fading-selection');

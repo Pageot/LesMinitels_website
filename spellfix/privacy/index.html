@@ -81,10 +81,9 @@
       <hr>
 
       <h2>Permissions we request</h2>
-      <p>On macOS, SpellFix asks for two permissions:</p>
+      <p>On macOS, SpellFix runs as a system <strong>Service</strong> (“Correct with SpellFix”). You enable its keyboard shortcut once in <strong>System Settings → Keyboard → Keyboard Shortcuts → Services</strong> (⌃⌥⌘C by default). When you trigger it, macOS hands SpellFix the text you selected and replaces it with the correction — SpellFix never monitors, logs, or records your keystrokes. It asks for one permission:</p>
       <ul>
         <li><strong>Accessibility</strong> — required to read your text selection and replace it with the corrected version. This permission is used only locally and never transmitted.</li>
-        <li><strong>Input monitoring</strong> — required to detect the double-tap shortcut globally. Keystrokes are not logged or stored; SpellFix only listens for the shortcut you configured.</li>
       </ul>
       <p>On Windows, SpellFix requires no special runtime permission: it reads and replaces your selection through standard system APIs. On either platform, your keystrokes and text are never logged, stored, or transmitted.</p>
 

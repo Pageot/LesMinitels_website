@@ -341,6 +341,109 @@ section { position: relative; }
   background: linear-gradient(180deg, #f0e9dc 0%, #e7e0d1 100%);
 }
 
+/* ── OS-adaptive shortcut display ──────────────────────────────────────────
+   Both shortcut variants live in the DOM (good for SEO / no-JS). Default =
+   Windows variant visible; only a confirmed macOS desktop gets html.os-mac
+   (set by the blocking <head> script), which flips which variant shows. */
+.os-only-mac { display: none; }
+html.os-mac .os-only-win { display: none; }
+html.os-mac .os-only-mac { display: inline; }
+
+/* The pill and how-step keycaps are inline-flex — restore that, not `inline`. */
+.dt-pill.os-only-mac { display: none; }
+html.os-mac .dt-pill.os-only-win { display: none; }
+/* The 4-key combo is wider than a single keycap. Center it in the painting at
+   every viewport width: pin left:0/right:0, size to content, and let auto margins
+   distribute the slack equally — robust across the whole --scale clamp range
+   (a fixed left % only centers in the scale's linear region, not at its clamps). */
+html.os-mac .dt-pill.os-only-mac {
+  display: inline-flex;
+  left: 0;
+  right: 0;
+  width: max-content;
+  margin-inline: auto;
+}
+.how-step__keycap.os-only-mac { display: none; }
+html.os-mac .how-step__keycap.os-only-win { display: none; }
+html.os-mac .how-step__keycap.os-only-mac { display: inline-flex; }
+
+/* Windows keycap shows the text "alt" (not the Mac ⌥ glyph) — smaller font. */
+.dt-keycap--text { font-size: calc(26 * var(--scale)); letter-spacing: 0.01em; }
+.how-step__keycap.dt-keycap--text { font-size: clamp(22px, 9cqw, 34px); }
+
+/* Mac combo keycap: four standalone SQUARE keys (⌃ ⌥ ⌘ C) — no backing tray. */
+.dt-keycap--combo {
+  width: auto;
+  height: auto;
+  padding: 0;
+  gap: calc(6 * var(--scale));
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+}
+.dt-keycap--combo.pressed {            /* keep the tray gone while the combo dips */
+  background: none;
+  box-shadow: none;
+}
+.dt-keycap--combo .dt-key {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: calc(64 * var(--scale));
+  height: calc(64 * var(--scale));
+  border-radius: calc(12 * var(--scale));
+  background: linear-gradient(180deg, #ffffff 0%, #f6f0e3 100%);
+  border: 1px solid var(--border);
+  box-shadow: 0 calc(1 * var(--scale)) 0 rgba(26,26,26,0.14), inset 0 calc(-2 * var(--scale)) 0 rgba(0,0,0,0.05);
+  font-size: calc(30 * var(--scale));
+  line-height: 1;
+}
+/* Combo in the how-step context: square keys sized to that section's scale. */
+.how-step__keycap.dt-keycap--combo {
+  width: auto;
+  min-width: 0;
+  height: auto;
+  padding: 0;
+}
+.how-step__keycap.dt-keycap--combo .dt-key {
+  width: clamp(44px, 16cqw, 56px);
+  height: clamp(44px, 16cqw, 56px);
+  font-size: clamp(18px, 7cqw, 26px);
+}
+
+/* Step 2 ("press the shortcut"): the keycap and the body card live in one flex
+   column overlaying the painting. The keyzone flex-grows to fill whatever space
+   the body leaves, so the keycap stays vertically centred in the *visible*
+   painting strip no matter how tall the body text becomes (FR/EN, any wrap) —
+   the cross-axis analogue of the hero pill's margin:auto. Replaces the old fixed
+   `top: 32%`, which decentred the moment the body card grew. */
+.how-step--stage .how-step__overlay {
+  grid-column: 1; grid-row: 1;
+  align-self: stretch;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+}
+.how-step--stage .how-step__keyzone {
+  flex: 1 1 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.how-step--stage .how-step__body {
+  align-self: stretch;   /* override generic align-self:end (cross axis under flex) */
+}
+.how-step--stage .how-step__keycap {
+  position: static;
+  transform: none;
+}
+.how-step--stage .how-step__keycap.pressed {
+  transform: translateY(calc(2 * var(--scale))) scale(0.97);
+}
+
+/* Small secondary "other-OS" mention lines. */
+.hero-sub__alt { display: block; margin-top: 0.5rem; font-size: 0.82em; opacity: 0.7; }
+.how-step__alt { display: block; margin-top: 0.4rem; font-size: 0.88em; opacity: 0.68; }
+
 /* Mail mock. Figma: position left 25 / right 26 (in 510 wide), full width 459,
    rounded-top-12, border 1 #c1c1c1. Base font-size 14px = 1em at Figma ref. */
 .mail-mock {
