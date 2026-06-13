@@ -78,7 +78,10 @@
         <button class="{{ nav.fr_active }}" data-lang-switch="fr" data-href="{{ paths.fr_home }}">FR</button>
         <button class="{{ nav.en_active }}" data-lang-switch="en" data-href="{{ paths.en_home }}">EN</button>
       </div>
-      <a class="btn btn-primary" href="#download" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
+      <!-- Quick-download button: links straight to the store matching the visitor's
+           OS (same os-only mechanism as the rest of the page). Default = Windows. -->
+      <a class="btn btn-primary os-only-win" href="https://apps.microsoft.com/detail/9N1ZS0LRTZK2" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
+      <a class="btn btn-primary os-only-mac" href="https://apps.apple.com/app/id6762399800" aria-label="{{ nav.download }}"><img src="{{ paths.assets }}/images/download-icon-white.svg" alt="" class="btn-icon" width="18" height="18"><span class="btn-label">{{ nav.download }}</span></a>
     </div>
   </div>
 </header>
@@ -95,12 +98,10 @@
         <span class="hero-sub__alt"><span class="os-only-win">{{ hero.sub_alt_win }}</span><span class="os-only-mac">{{ hero.sub_alt_mac }}</span></span>
       </p>
       <div class="hero-cta" id="download">
-        <!-- TODO: remplacer href="#" par l'URL Mac App Store une fois l'app publiée -->
-        <a href="#" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
+        <a href="https://apps.apple.com/app/id6762399800" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
           <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="48">
         </a>
-        <!-- TODO: remplacer href="#" par l'URL Microsoft Store une fois l'app publiée -->
-        <a href="#" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
+        <a href="https://apps.microsoft.com/detail/9N1ZS0LRTZK2" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
           <img src="{{ paths.assets }}/images/microsoft-store-badge.svg" alt="{{ hero.ms_badge_alt }}" height="48">
         </a>
       </div>
@@ -510,12 +511,10 @@
   <div class="container">
     <h2 class="display h2">{{ closing.title }}</h2>
     <div class="store-badges" style="margin-top:10px;">
-      <!-- TODO: remplacer href="#" par l'URL Mac App Store une fois l'app publiée -->
-      <a href="#" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
+      <a href="https://apps.apple.com/app/id6762399800" class="appstore-badge" data-store="mac-app-store" aria-label="{{ hero.badge_aria }}">
         <img src="{{ paths.assets }}/images/appstore-badge.svg" alt="{{ hero.badge_alt }}" height="48">
       </a>
-      <!-- TODO: remplacer href="#" par l'URL Microsoft Store une fois l'app publiée -->
-      <a href="#" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
+      <a href="https://apps.microsoft.com/detail/9N1ZS0LRTZK2" class="appstore-badge" data-store="microsoft-store" aria-label="{{ hero.ms_badge_aria }}">
         <img src="{{ paths.assets }}/images/microsoft-store-badge.svg" alt="{{ hero.ms_badge_alt }}" height="48">
       </a>
     </div>
