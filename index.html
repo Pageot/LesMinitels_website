@@ -120,7 +120,13 @@
       a.setAttribute("draggable", "false");
       if (proj) a.dataset.project = proj.id;
       if (linked) {
-        a.href = `/${proj.id}/`;
+        if (proj.externalUrl) {
+          a.href = proj.externalUrl;
+          a.target = "_blank";
+          a.rel = "noopener noreferrer";
+        } else {
+          a.href = `/${proj.id}/`;
+        }
         a.setAttribute("aria-label", `Voir le projet ${proj.name}`);
       } else {
         a.href = "#";

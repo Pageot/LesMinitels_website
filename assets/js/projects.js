@@ -44,6 +44,14 @@ export const PROJECTS = {
     showreel: ["/assets/img/SpellFix_showreel.webp"],
     ready: true,
   },
+  allia: {
+    id: "allia",
+    name: "Allia",
+    showreel: ["/assets/img/Allia_showreel.webp"],
+    // No internal page: the home card links straight to the app's own site.
+    externalUrl: "https://allia-app.fr",
+    ready: true,
+  },
 };
 
 // Home carousel order — 6 slots, placeholders reserved for upcoming apps.
@@ -52,6 +60,6 @@ export const CAROUSEL_ITEMS = [
   { slot: 2, project: null, label: "Soon", placeholder: true },
   { slot: 3, project: "convert", label: "Convert" },
   { slot: 4, project: "spellfix", label: "SpellFix" },
-  { slot: 5, project: null, label: "Soon", placeholder: true },
+  { slot: 5, project: "allia", label: "Allia" },
   { slot: 6, project: null, label: "Soon", placeholder: true },
 ];
